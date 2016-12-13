@@ -25,6 +25,7 @@ public class SmokeTest extends InitTest {
 	private static final String PROTOCOL_NAME = "Test Protocol";
 	private static final String EXPERIMENT_NAME = "Auto Test Run " + System.currentTimeMillis();
 	
+	
 	@BeforeMethod
 	public void openLanding() {
 		landingPage.open();
