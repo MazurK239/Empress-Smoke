@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="LoginTests" verbose="1" >
+  <test name="Credentials" >
+    <classes>
+       <class name="uitestsPO.LoginTestsCredentials" />
+    </classes>
+  </test>
+ 
+  <test name="Checkbox">
+    <classes>
+      <class name="uitestsPO.LoginTestsCheckbox"/>
+    </classes>
+  </test>
+
+  <test name="Logout">
+    <classes>
+      <class name="uitestsPO.LoginTestsLogout"/>
+    </classes>
+  </test>
+</suite>

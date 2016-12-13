@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression">
+	<test name="Login">
+		<classes>
+		    <class name="uitestsPO.LoginTestsCredentials"/>
+		    <class name="uitestsPO.LoginTestsCheckbox"/>
+		    <class name="uitestsPO.LoginTestsLogout"/>
+		</classes>
+	</test> 
+	<test name="Permissions">
+		<classes>
+		    <class name="uitestsPO.PermissionsTests"/>
+		</classes>
+	</test> 
+	<test name="Validation">
+		<classes>
+		    <class name="uitestsPO.ValidationTests"/>
+		</classes>
+	</test> 
+</suite> 
