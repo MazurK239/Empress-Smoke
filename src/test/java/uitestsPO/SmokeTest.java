@@ -13,6 +13,7 @@ import com.epam.web.matcher.verify.Verify;
 
 import static sites.EmpressSite.*;
 import enums.ExpDashboardTabs;
+import enums.MonitoringTabs;
 import enums.VisDashboardTabs;
 import enums.PlateAnalysisViews;
 
@@ -82,6 +83,8 @@ public class SmokeTest extends InitTest {
 		experimentPage.runExperiment(0.5f, 0.5f, 0.5f, 0.5f, WELLS, EXPERIMENT_NAME, "For automation needs");
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment(EXPERIMENT_NAME);
+		monitoringPage.tabs.select(MonitoringTabs.SUCCEEDED);
+		Assert.assertTrue(() -> monitoringPage.hasSucceeded(EXPERIMENT_NAME));
 	}
 	
 	@Test(dependsOnMethods={"runProtocol"})

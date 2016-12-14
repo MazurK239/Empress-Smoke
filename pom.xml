@@ -128,7 +128,7 @@
         		<env>dev</env>
         		<domain>http://empress.ggasoftware.com:8080/index.html#</domain>
         		<browser.name>chrome</browser.name>
-        		<sila.name>empress</sila.name>
+        		<sila.name>EMPRESS</sila.name>
         		<username>user1</username>
         		<password>p@ssw0rd</password>
         		<mld.password>mldp@ssw0rd</mld.password>
@@ -150,7 +150,7 @@
       		<id>local</id>
       		<properties>
         		<env>local</env>
-        		<domain>http://localhost:8080/index.html#</domain>
+        		<domain>http://eprupetw6500.petersburg.epam.com:8080/index.html#</domain>
         		<browser.name>chrome</browser.name>
         		<sila.name>EPRUPETW6500</sila.name>
         		<username>user1</username>
