@@ -6,12 +6,7 @@
   <version>1.0</version>
   <name>Archetype - empress-test</name>
   <url>http://maven.apache.org</url>
-  
-  <properties>
-    <aspectj.version>1.7.4</aspectj.version>
-    <allure.version>1.4.23</allure.version>
-  </properties>
-  
+    
   <repositories>
     <repository>
          <id>localrepository</id>
@@ -25,22 +20,11 @@
             <artifactId>sikulixapi</artifactId>
             <version>1.1.0</version>
         </dependency>
-  		<dependency>
-      		<groupId>ru.stqa.selenium</groupId>
-      		<artifactId>webdriver-factory</artifactId>
-      		<version>1.1.46</version>
-    	</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.9.9</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -55,7 +39,7 @@
 		<dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-testng-adaptor</artifactId>
-            <version>${allure.version}</version>
+            <version>1.4.23</version>
     </dependency>
 	</dependencies>
 	
@@ -85,7 +69,7 @@
                 <dependency>
                     <groupId>org.aspectj</groupId>
                     <artifactId>aspectjweaver</artifactId>
-                    <version>${aspectj.version}</version>
+                    <version>1.7.4</version>
                 </dependency>
             </dependencies>
       		</plugin>

@@ -5,7 +5,6 @@ import org.openqa.selenium.support.FindBy;
 import com.epam.commons.Timer;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Tabs;
-import com.epam.web.matcher.base.BaseMatcher;
 import com.epam.web.matcher.testng.Assert;
 
 import enums.MonitoringTabs;
@@ -34,9 +33,6 @@ public class MonitoringPage extends InternalPage {
 		Assert.assertTrue(() -> inProgressExperimentsList.get(0).getExperimentName().equals(experimentName));
 		timer.setTimeout(300 * 1000);
 		timer.wait(() -> this.nothingIsRunning());
-//		BaseMatcher.setDefaultTimeout(300 * 1000); 
-//		Assert.assertTrue(() -> this.nothingToShow());
-//		BaseMatcher.setDefaultTimeout(10 * 1000);
 	}
 
 	public boolean hasSucceeded(String experimentName) {
