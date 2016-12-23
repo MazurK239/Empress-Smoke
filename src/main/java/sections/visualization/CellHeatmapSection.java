@@ -17,11 +17,11 @@ public class CellHeatmapSection extends CellLevelSection {
 	protected Clickable canvas;
 	
 	public boolean isMainControlDisplayed() {
-		try {
-			screen.wait("/skl_img/heatmap_ready.png");
-		} catch (FindFailed e) {
-			return false;
-		}
+//		try {
+//			screen.wait("/skl_img/heatmap_ready.png");
+//		} catch (FindFailed e) {
+//			return false;
+//		}
 		return canvas.isDisplayed();
 	}
 

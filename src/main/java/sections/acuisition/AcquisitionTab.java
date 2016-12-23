@@ -22,6 +22,9 @@ public class AcquisitionTab extends Section {
 	@FindBy(css=".labware-settings-list-item__value")
 	private Elements<Clickable> labwareList;
 	
+	@FindBy(css=".labware-settings-list-item.selected .labware-settings-list-item__value")
+	private Clickable selectedLabware;
+	
 	@FindBy(css=".general-button-panel-right button:nth-child(4)")
 	private MldToggler objectiveToggler;
 
@@ -45,6 +48,7 @@ public class AcquisitionTab extends Section {
 
 	@FindBy(css="canvas")
 	public OSD canvas;
+
 
 
 	public AcquisitionTab setLabware(String labware) {
@@ -104,7 +108,7 @@ public class AcquisitionTab extends Section {
 
 	public String getSelectedLabwareName() {
 		labwareToggler.turnOn();
-		return labwareList.get(0).getWebElement().getText();
+		return selectedLabware.getWebElement().getText();
 	}
 	
 }

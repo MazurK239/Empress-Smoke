@@ -18,13 +18,13 @@ public class SaveTab extends Section {
 	@FindBy(xpath="//textarea[contains(@class,'description-input')]")
 	private TextField descriptionField;
 
-	@FindBy(xpath="//button[@title='Save']")
+	@FindBy(css="mld-experiment-save-panel .general-panel-button:last-child")
 	private Button saveButton;
 	
-	@FindBy(xpath="//button[@title='Lock Protocol']")
+	@FindBy(css="mld-experiment-save-panel .general-panel-button:first-child")
 	private MldToggler lockProtocolToggler;
 	
-	@FindBy(xpath="//mld-user-sharing-panel")
+	@FindBy(css="mld-user-sharing-panel")
 	private SharingPanel protocolPermissionSection;
 	
 	@FindBy(css="mld-experiment-validation")

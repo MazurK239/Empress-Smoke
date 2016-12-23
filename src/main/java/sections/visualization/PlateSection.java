@@ -27,10 +27,14 @@ public class PlateSection extends WellLevelSection {
 	public boolean isMainControlDisplayed() {
 		try {
 			System.out.println("waiting");
-			screen.wait("/skl_img/heatmap_ready.png");
+			screen.wait("/skl_img/heatmap_ready_light.png");
 			System.out.println("Hooray!");
 		} catch (FindFailed e) {
-			return false;
+			try {
+				screen.wait("/skl_img/heatmap_ready_dark.png");
+			} catch (FindFailed e1) {
+				return false;
+			}
 		}
 		return super.isMainControlDisplayed();
 	}

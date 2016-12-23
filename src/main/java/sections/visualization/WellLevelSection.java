@@ -8,10 +8,10 @@ import model.MldToggler;
 
 public class WellLevelSection extends AnalysisSection {
 
-	@FindBy(xpath="//mld-rolling-panel//button[@title='Cell Level Heatmap']")	
+	@FindBy(css=".rolling-panel button:nth-child(2)")	
 	protected Button cellHeatmapButton;
 
-	@FindBy(xpath="//button[@title='Selected Only']")
+	@FindBy(xpath="//button[@title='Show Selected Only']")
 	protected MldToggler selectedOnlyToggler;
 	
 	public void goToCellHeatmap() {

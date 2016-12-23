@@ -26,23 +26,26 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css=".selected .template-item__title")
 	private Elements<Clickable> selectedTemplate;
 
-	@FindBy(xpath="//button[@title='Summary Measurements']")
-	private MldToggler sumMeasurementsToggler;
+	@FindBy(xpath="//button[@title='Measurements']")
+	private MldToggler measurementsToggler;
 	
-	@FindBy(css="mld-summary-measurements-panel")
+	@FindBy(xpath="//li[@heading='Summary Measurements']")
+	private MldToggler sumMeasurementsTab;
+
+	@FindBy(css="mld-measurements-selector[measurement-type=summary]")
 	private MeasurementsPanel sumMeasurementsPanel;
 
-	@FindBy(xpath="//button[@title='Cell Measurements']")
-	private MldToggler cellMeasurementsToggler;
+	@FindBy(xpath="//li[@heading='Cell Measurements']")
+	private MldToggler cellMeasurementsTab;
+	
+	@FindBy(css="mld-measurements-selector[measurement-type=cell]")
+	private MeasurementsPanel cellMeasurementsPanel;
 
 	@FindBy(xpath="//label[@title='Single Mode']")
 	private MldToggler hdrModeToggler;
 	
 	@FindBy(xpath="//label[@title='Comparison Mode']")
 	private MldToggler compareModeToggler;
-
-	@FindBy(css="mld-cell-measurements-panel")
-	private MeasurementsPanel cellMeasurementsPanel;
 	
 	@FindBy(css="canvas")
 	public OSD canvas;
@@ -50,13 +53,13 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css="mld-analysis-parameters")
 	public AlgInputPanel algorithmInputPanel;
 
-	@FindBy(xpath="//li[@title='Algorithm input']")
+	@FindBy(css="ul.nav-tabs > li:last-child")
 	private Clickable algorithmInputPanelIcon;
 
-	@FindBy(css=".bottom-set button:first-child")
+	@FindBy(css=".general-panel-button-acq-capture:nth-last-of-type(2)")
 	private Clickable runTestAnalysisButton;
 
-	@FindBy(css=".bottom-set button:nth-child(2)")
+	@FindBy(css=".general-panel-button-acq-capture:last-of-type")
 	private Clickable captureButton;
 
 
@@ -71,12 +74,14 @@ public class AnalysisSettingsTab extends Section {
 	}
 
 	public MeasurementsPanel expandSumMeasurements() {
-		sumMeasurementsToggler.turnOn();
+		measurementsToggler.turnOn();
+		sumMeasurementsTab.click();
 		return sumMeasurementsPanel;
 	}
 
 	public MeasurementsPanel expandCellMeasurements() {
-		cellMeasurementsToggler.turnOn();
+		measurementsToggler.turnOn();
+		cellMeasurementsTab.click();
 		return cellMeasurementsPanel;
 	}
 

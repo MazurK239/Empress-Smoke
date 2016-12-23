@@ -13,7 +13,7 @@ public class DeviceTab extends Section {
 	@FindBy(xpath="//ul/li/span[contains(@class, 'item-name')]")
 	private Elements<Clickable> devices;
 
-	@FindBy(css="div.selected-item > .item-name")
+	@FindBy(css="li.selected-item > .item-name")
 	public Element selectedDevice;
 	
 	public String getSelectedDeviceName() {

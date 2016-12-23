@@ -29,7 +29,7 @@ public class ExperimentPage extends InternalPage {
 	@FindBy(css="mld-experiment-wellarea-acquisition-panel")
 	public ZoneSelectionTab acquisitionZonesTab;
 
-	@FindBy(xpath="//button[@title='Analysis settings']")
+	@FindBy(xpath="//button[@title='Analysis Settings']")
 	public Button analysisSettingsIcon;
 
 	@FindBy(css="mld-experiment-analysis-panel")
@@ -41,13 +41,13 @@ public class ExperimentPage extends InternalPage {
 	@FindBy(css="mld-experiment-wellarea-analysis-panel")
 	public ZoneSelectionTab analysisZonesTab;
 
-	@FindBy(xpath="//button[@title='Well selection']")
+	@FindBy(xpath="//button[@title='Well Selection']")
 	public Button wellSelectionIcon;
 
 	@FindBy(css="mld-experiment-well-selection-panel")
 	public WellSelectionTab wellSelectionTab;
 
-	@FindBy(xpath="//mld-experiment-button-panel//button[@title='Save']")
+	@FindBy(xpath="//mld-experiment-button-panel//button[@title='Save Protocol']")
 	public Button saveIcon;
 
 	@FindBy(css="mld-experiment-save-panel")

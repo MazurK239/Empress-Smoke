@@ -63,6 +63,7 @@ public class SmokeTest extends InitTest {
 		verify.isTrue(() -> experimentPage.openAnalysisSettingsTab().getSelectedAnalysisName().equals(ANALYSIS_NAME));
 		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 3);
 		experimentPage.analysisSettingsTab.capture();
+		experimentPage.analysisSettingsTab.runTestAnalysis();
 		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cell")));
 		Assert.isEmpty(Verify.getFails());
 	}
