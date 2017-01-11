@@ -58,13 +58,13 @@ public class SmokeTest extends InitTest {
 		verify.isTrue(() -> experimentPage.selectDeviceTab.getSelectedDeviceName().equals(DEVICE_NAME));
 		verify.isTrue(() -> experimentPage.openAcquisitionTab().getSelectedLabwareName().equals(LABWARE_NAME));
 		experimentPage.openAcquisitionTab().capture();
-		experimentPage.acquisitionTab.waitImageLoaded("sila");
-		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cy5", "DAPI", "TRITC", "FITC", "TL")));
+//		experimentPage.acquisitionTab.waitImageLoaded("sila");
+//		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cy5", "DAPI", "TRITC", "FITC", "TL")));
 		verify.isTrue(() -> experimentPage.openAnalysisSettingsTab().getSelectedAnalysisName().equals(ANALYSIS_NAME));
 		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 3);
 		experimentPage.analysisSettingsTab.capture();
 		experimentPage.analysisSettingsTab.runTestAnalysis();
-		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cell")));
+//		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cell")));
 		Assert.isEmpty(Verify.getFails());
 	}
 	

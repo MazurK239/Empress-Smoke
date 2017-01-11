@@ -7,30 +7,30 @@
   <name>Archetype - empress-test</name>
   <url>http://maven.apache.org</url>
     
-  <repositories>
+  <!--  <repositories>
     <repository>
          <id>localrepository</id>
          <url>file://D:\Eclipse_projects\NewEmpress\empress-test/repo</url>
     </repository> 
-  </repositories>
+  </repositories>  -->
     
   <dependencies>
-        <dependency>
-            <groupId>com</groupId>
-            <artifactId>sikulixapi</artifactId>
-            <version>1.1.0</version>
-        </dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.9.9</version>
 			<scope>compile</scope>
 		</dependency>
+        <!-- <dependency>
+            <groupId>com</groupId>
+            <artifactId>sikulixapi</artifactId>
+            <version>1.1.0</version>
+        </dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.48.2</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.epam.jdi</groupId>
 			<artifactId>jdi-uitest-web</artifactId>

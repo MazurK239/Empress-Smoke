@@ -1,10 +1,7 @@
 package sections.visualization;
 
-import static sites.EmpressSite.screen;
-
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.sikuli.script.FindFailed;
 
 import com.epam.jdi.uitests.web.selenium.elements.base.Clickable;
 
@@ -17,11 +14,6 @@ public class CellHeatmapSection extends CellLevelSection {
 	protected Clickable canvas;
 	
 	public boolean isMainControlDisplayed() {
-//		try {
-//			screen.wait("/skl_img/heatmap_ready.png");
-//		} catch (FindFailed e) {
-//			return false;
-//		}
 		return canvas.isDisplayed();
 	}
 

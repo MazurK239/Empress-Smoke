@@ -1,11 +1,11 @@
 package sections.visualization;
 
-import static sites.EmpressSite.screen;
+//import static sites.EmpressSite.screen;
 
 import java.util.List;
 
 import org.openqa.selenium.interactions.Actions;
-import org.sikuli.script.FindFailed;
+//import org.sikuli.script.FindFailed;
 
 public class PlateSection extends WellLevelSection {
 
@@ -25,17 +25,17 @@ public class PlateSection extends WellLevelSection {
 	
 	@Override
 	public boolean isMainControlDisplayed() {
-		try {
-			System.out.println("waiting");
-			screen.wait("/skl_img/heatmap_ready_light.png");
-			System.out.println("Hooray!");
-		} catch (FindFailed e) {
-			try {
-				screen.wait("/skl_img/heatmap_ready_dark.png");
-			} catch (FindFailed e1) {
-				return false;
-			}
-		}
+//		try {
+//			System.out.println("waiting");
+//			screen.wait("/skl_img/heatmap_ready_light.png");
+//			System.out.println("Hooray!");
+//		} catch (FindFailed e) {
+//			try {
+//				screen.wait("/skl_img/heatmap_ready_dark.png");
+//			} catch (FindFailed e1) {
+//				return false;
+//			}
+//		}
 		return super.isMainControlDisplayed();
 	}
 	

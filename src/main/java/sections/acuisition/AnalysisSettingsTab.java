@@ -53,13 +53,13 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css="mld-analysis-parameters")
 	public AlgInputPanel algorithmInputPanel;
 
-	@FindBy(css="ul.nav-tabs > li:last-child")
-	private Clickable algorithmInputPanelIcon;
-
-	@FindBy(css=".general-panel-button-acq-capture:nth-last-of-type(2)")
-	private Clickable runTestAnalysisButton;
+	@FindBy(css=".acq-labware-controls> button:last-of-type")
+	private MldToggler algorithmInputPanelToggler;
 
 	@FindBy(css=".general-panel-button-acq-capture:last-of-type")
+	private Clickable runTestAnalysisButton;
+
+	@FindBy(css=".acq-labware-controls .general-panel-button-acq-capture")
 	private Clickable captureButton;
 
 
@@ -97,7 +97,7 @@ public class AnalysisSettingsTab extends Section {
 	}
 
 	public AlgInputPanel openAlgorithmInputPanel() {
-		algorithmInputPanelIcon.click();
+		algorithmInputPanelToggler.turnOn();
 		return algorithmInputPanel;
 	}
 

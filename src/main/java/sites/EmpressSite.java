@@ -1,6 +1,6 @@
 package sites;
 
-import org.sikuli.script.Screen;
+//import org.sikuli.script.Screen;
 
 import com.epam.jdi.uitests.web.selenium.elements.composite.CheckPageTypes;
 import com.epam.jdi.uitests.web.selenium.elements.composite.WebSite;
@@ -52,5 +52,5 @@ public class EmpressSite extends WebSite {
 	@JPage(url="/devices", title="Devices")
 	public static DevicesPage devicesPage;
 	
-	public static Screen screen = new Screen();
+//	public static Screen screen = new Screen();
 }

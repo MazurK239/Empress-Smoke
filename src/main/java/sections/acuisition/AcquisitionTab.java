@@ -1,7 +1,7 @@
 package sections.acuisition;
 
 import java.util.List;
-import org.sikuli.script.*;
+//import org.sikuli.script.*;
 import org.openqa.selenium.support.FindBy;
 
 import com.epam.commons.Timer;
@@ -9,7 +9,7 @@ import com.epam.jdi.uitests.web.selenium.elements.base.Clickable;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
 import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
-import static sites.EmpressSite.screen;
+//import static sites.EmpressSite.screen;
 import model.MldToggler;
 import model.OSD;
 import model.StainDropdownSection;
@@ -88,23 +88,23 @@ public class AcquisitionTab extends Section {
 		captureButton.click();
 	}
 
-	public void waitImageLoaded(String device) {
-		try{
-			screen.setAutoWaitTimeout(10);
-			switch (device) {
-			case "sila":				
-				screen.wait("skl_img/sila_snap.png");
-				break;
-			case "demo":				
-				screen.wait("skl_img/demo_snap.png");
-				break;
-			default:
-				break;
-			}
-		} catch(FindFailed e){
-            e.printStackTrace();
-		}
-	}
+//	public void waitImageLoaded(String device) {
+//		try{
+//			screen.setAutoWaitTimeout(10);
+//			switch (device) {
+//			case "sila":				
+//				screen.wait("skl_img/sila_snap.png");
+//				break;
+//			case "demo":				
+//				screen.wait("skl_img/demo_snap.png");
+//				break;
+//			default:
+//				break;
+//			}
+//		} catch(FindFailed e){
+//            e.printStackTrace();
+//		}
+//	}
 
 	public String getSelectedLabwareName() {
 		labwareToggler.turnOn();
