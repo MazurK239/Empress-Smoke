@@ -209,7 +209,7 @@ public class PermissionsTests extends InitTest {
 	}
 	
 	@AfterSuite
-	public void ñleanUp() {
+	public void cleanUp() {
 		landingPage.isOpened();	
 		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
 		dashboardPage.deleteExperiment("Permissions Icon Test Shared");
