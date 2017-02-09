@@ -39,12 +39,6 @@ public class InitTest extends TestNGBase {
     public void tearDown() {
         Verify.getFails();
     }
-	
-	public void loginAndSetService() {
-		loginPage.isOpened();
-		loginPage.loginAs(USERNAME, PASSWORD);
-		landingPage.openDevicesPage().setAnService("first");
-		devicesPage.goHome();
-	}
+
 	
 }

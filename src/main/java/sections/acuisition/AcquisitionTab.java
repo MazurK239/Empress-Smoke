@@ -36,11 +36,8 @@ public class AcquisitionTab extends Section {
 
 	@FindBy(xpath="//mld-stains-panel//select/..")
 	private Elements<StainDropdownSection> dropdowns;
-
-	@FindBy(css=".general-button-panel-right div:nth-child(6) label")
-	private MldToggler hdrToggler;
 	
-	@FindBy(css=".general-button-panel-right div:nth-child(7) label")
+	@FindBy(css=".general-button-panel-right button:nth-of-type(4)")
 	private MldToggler compareToggler;
 
 	@FindBy(css=".general-panel-button-acq-capture")
@@ -83,7 +80,6 @@ public class AcquisitionTab extends Section {
 		objectiveToggler.turnOff();
 		labwareToggler.turnOff();
 		stainsToggler.turnOff();
-		hdrToggler.turnOff();
 		compareToggler.turnOff();
 		captureButton.click();
 	}

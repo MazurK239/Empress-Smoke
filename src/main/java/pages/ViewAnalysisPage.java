@@ -2,8 +2,11 @@ package pages;
 
 import org.openqa.selenium.support.FindBy;
 
+import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
+
 import enums.PlateAnalysisViews;
 import model.BreadcrumbDropdown;
+import model.NavPanel;
 import sections.visualization.CellDeepZoomSection;
 import sections.visualization.CellHeatmapSection;
 import sections.visualization.CellScatterSection;
@@ -47,6 +50,9 @@ public class ViewAnalysisPage extends InternalPage {
 
 	@FindBy(css="mld-cell-level-scatter-tab")
 	public CellScatterSection cellScatter;
+
+	@FindBy(css="mld-left-navigation-panel")
+	public NavPanel leftNavPanel;
 
 	public void navigateToWellView(PlateAnalysisViews view) {
 		wellLevelDropdown.select(view);

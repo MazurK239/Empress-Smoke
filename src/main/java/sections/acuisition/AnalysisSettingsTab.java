@@ -40,11 +40,8 @@ public class AnalysisSettingsTab extends Section {
 	
 	@FindBy(css="mld-measurements-selector[measurement-type=cell]")
 	private MeasurementsPanel cellMeasurementsPanel;
-
-	@FindBy(xpath="//label[@title='Single Mode']")
-	private MldToggler hdrModeToggler;
 	
-	@FindBy(xpath="//label[@title='Comparison Mode']")
+	@FindBy(css=".general-button-panel-right button:nth-of-type(5)")
 	private MldToggler compareModeToggler;
 	
 	@FindBy(css="canvas")
@@ -56,11 +53,11 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css=".acq-labware-controls> button:last-of-type")
 	private MldToggler algorithmInputPanelToggler;
 
-	@FindBy(css=".general-panel-button-acq-capture:last-of-type")
+	@FindBy(css=".acq-labware-controls button:first-of-type")
 	private Clickable runTestAnalysisButton;
 
-	@FindBy(css=".acq-labware-controls .general-panel-button-acq-capture")
-	private Clickable captureButton;
+//	@FindBy(css=".acq-labware-controls .general-panel-button-acq-capture")
+//	private Clickable captureButton;
 
 
 	public AnalysisSettingsTab doAnalysis(boolean doAnalysis) {
@@ -102,7 +99,7 @@ public class AnalysisSettingsTab extends Section {
 	}
 
 	public AnalysisSettingsTab singleMode() {
-		hdrModeToggler.turnOn();
+		compareModeToggler.turnOff();
 		return this;
 	}
 
@@ -111,9 +108,9 @@ public class AnalysisSettingsTab extends Section {
 		return this;		
 	}
 	
-	public void capture() {
-		captureButton.click();
-	}
+//	public void capture() {
+//		captureButton.click();
+//	}
 
 	public void runTestAnalysis() {
 		runTestAnalysisButton.click();

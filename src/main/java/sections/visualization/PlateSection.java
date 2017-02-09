@@ -23,8 +23,8 @@ public class PlateSection extends WellLevelSection {
 		return this;
 	}
 	
-	@Override
-	public boolean isMainControlDisplayed() {
+//	@Override
+//	public boolean isMainControlDisplayed() {
 //		try {
 //			System.out.println("waiting");
 //			screen.wait("/skl_img/heatmap_ready_light.png");
@@ -36,7 +36,7 @@ public class PlateSection extends WellLevelSection {
 //				return false;
 //			}
 //		}
-		return super.isMainControlDisplayed();
-	}
+//		return super.isMainControlDisplayed();
+//	}
 	
 }

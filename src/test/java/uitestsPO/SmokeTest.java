@@ -6,6 +6,7 @@ import java.util.List;
 import static com.epam.web.matcher.testng.Assert.*;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.epam.web.matcher.testng.Assert;
@@ -27,17 +28,19 @@ public class SmokeTest extends InitTest {
 	private static final String EXPERIMENT_NAME = "Auto Test Run " + System.currentTimeMillis();
 	
 	
+	@BeforeSuite
+	public void login() {
+		loginPage.isOpened();
+		loginPage.loginAsReturn(USERNAME, PASSWORD);
+		landingPage.checkOpened();
+	}
+
 	@BeforeMethod
 	public void openLanding() {
 		landingPage.open();
 	}
 
 	@Test
-	public void login() {
-		loginAndSetService();
-	}
-
-	@Test(dependsOnMethods={"login"})
 	public void createProtocol() {
 		landingPage.openDataAcquisitionPage();
 		experimentTemplatesPage.selectTab(ExpDashboardTabs.TEMPLATES);
@@ -62,7 +65,6 @@ public class SmokeTest extends InitTest {
 //		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cy5", "DAPI", "TRITC", "FITC", "TL")));
 		verify.isTrue(() -> experimentPage.openAnalysisSettingsTab().getSelectedAnalysisName().equals(ANALYSIS_NAME));
 		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 3);
-		experimentPage.analysisSettingsTab.capture();
 		experimentPage.analysisSettingsTab.runTestAnalysis();
 //		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cell")));
 		Assert.isEmpty(Verify.getFails());
@@ -94,11 +96,12 @@ public class SmokeTest extends InitTest {
 		assertTrue(() -> viewAnalysisPage.thumbView.isMainControlDisplayed());
 		viewAnalysisPage.navigateToWellView(PlateAnalysisViews.IMAGES);
 		assertTrue(() -> viewAnalysisPage.deepZoom.checkWells(WELLS));
-		viewAnalysisPage.switchTo(ANALYSIS_NAME);
+		viewAnalysisPage.switchTo(EXPERIMENT_NAME);
 		assertTrue(() -> viewAnalysisPage.deepZoom.areZonesDisplayed(1));
 		viewAnalysisPage.navigateToWellView(PlateAnalysisViews.HEATMAP);
 		assertTrue(() -> viewAnalysisPage.heatmap.isMainControlDisplayed());
-		viewAnalysisPage.heatmap.selectWells(WELLS, LABWARE_GEOMETRY).goToCellHeatmap();
+		viewAnalysisPage.heatmap.selectWells(WELLS, LABWARE_GEOMETRY);
+		viewAnalysisPage.leftNavPanel.goToCellHeatmap();
 		assertTrue(() -> viewAnalysisPage.cellHeatmap.isMainControlDisplayed());
 	}
 	

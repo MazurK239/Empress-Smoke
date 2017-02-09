@@ -10,17 +10,14 @@ import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 import model.MldToggler;
 
 public class AnalysisSection extends Section {
-
+	
 	@FindBy(xpath="//button[@title='Selection Mode']")
 	protected MldToggler selectionModeToggler;
 
 	@FindBy(xpath="//button[@title='Selection Mode']")
 	protected Button deselectAllButton;
-	
-	@FindBy(xpath="//button[@title='Go to Cell Level...']")
-	protected Button goToButton;
-	
-	@FindBy(css="canvas")
+		
+	@FindBy(css="canvas:first-child")
 	protected Clickable canvas;
 
 	public boolean isMainControlDisplayed() {

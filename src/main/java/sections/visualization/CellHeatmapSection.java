@@ -10,7 +10,7 @@ public class CellHeatmapSection extends CellLevelSection {
 
 	private Actions action = new Actions(this.getDriver());
 	
-	@FindBy(css=".table-canvas-wrapper__canvas")
+	@FindBy(css="canvas:nth-of-type(1)")
 	protected Clickable canvas;
 	
 	public boolean isMainControlDisplayed() {

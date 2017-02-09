@@ -27,7 +27,8 @@ public class NavigationTests extends InitTest {
 	public void cellLevelDropDown() {
 		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
 		dashboardPage.findExperiment("Some experiment").choose("Cell Count").view();
-		viewAnalysisPage.thumbView.selectWells(Arrays.asList("C4"), new int[]{6,4}).goToCellHeatmap();
+		viewAnalysisPage.thumbView.selectWells(Arrays.asList("C4"), new int[]{6,4});
+		viewAnalysisPage.leftNavPanel.goToCellHeatmap();
 		assertTrue(() -> viewAnalysisPage.cellHeatmap.isMainControlDisplayed());
 		viewAnalysisPage.navigateToCellView(PlateAnalysisViews.CELL_STACKED);
 		assertTrue(() -> viewAnalysisPage.cellStacked.isMainControlDisplayed());
