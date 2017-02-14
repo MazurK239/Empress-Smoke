@@ -15,7 +15,6 @@ import com.epam.web.matcher.verify.Verify;
 import static com.epam.web.matcher.testng.Assert.assertTrue;
 
 import enums.ExpDashboardTabs;
-import enums.VisDashboardTabs;
 
 public class PermissionsTests extends InitTest {
 	
@@ -28,8 +27,8 @@ public class PermissionsTests extends InitTest {
 		loginPage.isOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);
 		landingPage.checkOpened();
-		if (landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS).findExperiment(EXPERIMENT_NAME) == null) {
-			dashboardPage.goHome().openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES).findTemplate("New Plate Acquisition").open();
+		if (landingPage.openDataVisualizationPage().findExperiment(EXPERIMENT_NAME) == null) {
+			dashboardPage.goHome().openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL).findTemplate("New Plate Acquisition").open();
 			experimentPage.runFromScratch(DEVICE_NAME, "96 Well Plate", Arrays.asList("Off", "DAPI", "TRITC", "FITC", "Off"),
 					                      "4x", 0.4f, 0.4f, false, ANALYSIS_NAME, 0.5f, 0.5f, Arrays.asList("E7", "E8"), EXPERIMENT_NAME, "");
 			monitoringPage.checkOpened();
@@ -48,7 +47,7 @@ public class PermissionsTests extends InitTest {
 		userSettingsPage.openPermissionsTab().protocolSharingPanel.lockLock().addUsers(Arrays.asList("aaa"));
 		userSettingsPage.openPermissionsTab().experimentSharingPanel.lockLock().addUsers(Arrays.asList("bbb"));
 		userSettingsPage.goHome().openDataAcquisitionPage();
-		experimentTemplatesPage.selectTab(ExpDashboardTabs.TEMPLATES);
+		experimentTemplatesPage.selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		verify.isTrue(() -> experimentPage.openSaveTab().expandSharingPanel().getLockState().equals("Locked"));
 		verify.isTrue(() -> experimentPage.saveTab.expandSharingPanel().isUserInList("aaa"));
@@ -65,7 +64,7 @@ public class PermissionsTests extends InitTest {
 		landingPage.openUserPrefs();
 		userSettingsPage.openPermissionsTab().protocolSharingPanel.lockLock().addUsers(Arrays.asList(""));
 		userSettingsPage.openPermissionsTab().experimentSharingPanel.lockLock().addUsers(Arrays.asList(""));
-		userSettingsPage.goHome().openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES);
+		userSettingsPage.goHome().openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		verify.isTrue(() -> experimentPage.openSaveTab().expandSharingPanel().getLockState().equals("Locked"));
 		verify.isTrue(() -> experimentPage.saveTab.expandSharingPanel().isUserInList("user1"));
@@ -79,7 +78,7 @@ public class PermissionsTests extends InitTest {
 	
 	@Test(groups={"entity"})
 	public void shareExistingHide() {
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.checkOpened();
 		verify.isTrue(() -> editEntityPage.expandSharingPanel().getLockState().equals("Unlocked"));
@@ -92,11 +91,11 @@ public class PermissionsTests extends InitTest {
 		editEntityPage.logout();
 		loginPage.checkOpened();
 		loginPage.loginAs("mld", MLDPASSWORD);
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		verify.isTrue(() -> dashboardPage.findExperiment(EXPERIMENT_NAME) == null);
 		dashboardPage.logout();
 		loginPage.loginAs(USERNAME, PASSWORD);
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.expandSharingPanel().removeAllUsers().unlockLock();
 		Assert.isEmpty(Verify.getFails());
@@ -104,7 +103,7 @@ public class PermissionsTests extends InitTest {
 
 	@Test(groups={"entity"})
 	public void shareExistingAllow() {
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.checkOpened();
 		verify.isTrue(() -> editEntityPage.expandSharingPanel().getLockState().equals("Unlocked"));
@@ -115,11 +114,11 @@ public class PermissionsTests extends InitTest {
 		editEntityPage.logout();
 		loginPage.checkOpened();
 		loginPage.loginAs("mld", MLDPASSWORD);
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		verify.isTrue(() -> dashboardPage.findExperiment(EXPERIMENT_NAME) != null);
 		dashboardPage.logout();
 		loginPage.loginAs(USERNAME, PASSWORD);
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.expandSharingPanel().removeAllUsers().unlockLock();		
 		Assert.isEmpty(Verify.getFails());
@@ -127,7 +126,7 @@ public class PermissionsTests extends InitTest {
 	
 	@Test(groups={"dashboard"})
 	public void sharedIconTest() {
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		assertTrue(() -> dashboardPage.findExperiment(EXPERIMENT_NAME).isSharedIconPresent());
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.expandSharingPanel().lockLock();
@@ -141,7 +140,7 @@ public class PermissionsTests extends InitTest {
 	
 	@Test(groups={"dashboard", "experimentCreation"})
 	public void runPrivate() {
-		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES);
+		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		experimentPage.openDeviceTab().setDevice(DEVICE_NAME);
 		experimentPage.openAcquisitionTab().setLabware("96 Well Plate").
@@ -154,25 +153,25 @@ public class PermissionsTests extends InitTest {
 		experimentPage.runTab.setExperimentName("Permissions Icon Test Private").run();
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment("Permissions Icon Test Private");
-		monitoringPage.goHome().openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		monitoringPage.goHome().openDataVisualizationPage();
 		assertTrue(() -> !dashboardPage.findExperiment("Permissions Icon Test Private").isSharedIconPresent());
 	}
 
 	@Test(groups={"dashboard", "experimentCreation"})
 	public void runShared() {
-		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES);
+		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		experimentPage.runFromScratch(DEVICE_NAME, "96 Well Plate", Arrays.asList("Off", "Off", "Off", "DAPI", "Off"),
 				                      "4x", 0.5f, 0.5f, false, ANALYSIS_NAME,  0.5f, 0.5f, Arrays.asList("E7"), "Permissions Icon Test Shared", "");
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment("Permissions Icon Test Shared");
-		monitoringPage.goHome().openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		monitoringPage.goHome().openDataVisualizationPage();
 		assertTrue(() -> dashboardPage.findExperiment("Permissions Icon Test Shared").isSharedIconPresent());
 	}
 	
 	@Test
 	public void lockProtocol() {
-		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES).findTemplate("New Plate Acquisition").open();
+		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL).findTemplate("New Plate Acquisition").open();
 		experimentPage.createProtocol(DEVICE_NAME, "96 Well Plate", Arrays.asList("Off", "DAPI", "TRITC", "FITC", "Off"),
 				                      "4x", true, "Cell Count", PROTOCOL_NAME, "");
 		experimentPage.goToDashboard();
@@ -211,7 +210,7 @@ public class PermissionsTests extends InitTest {
 	@AfterSuite
 	public void cleanUp() {
 		landingPage.isOpened();	
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.deleteExperiment("Permissions Icon Test Shared");
 		dashboardPage.deleteExperiment("Permissions Icon Test Private");
 //		dashboardPage.deleteExperiment(EXPERIMENT_NAME);

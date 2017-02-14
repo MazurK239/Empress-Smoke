@@ -7,13 +7,6 @@
   <name>Archetype - empress-test</name>
   <url>http://maven.apache.org</url>
     
-  <!--  <repositories>
-    <repository>
-         <id>localrepository</id>
-         <url>file://D:\Eclipse_projects\NewEmpress\empress-test/repo</url>
-    </repository> 
-  </repositories>  -->
-    
   <dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -21,11 +14,6 @@
 			<version>6.9.9</version>
 			<scope>compile</scope>
 		</dependency>
-        <!-- <dependency>
-            <groupId>com</groupId>
-            <artifactId>sikulixapi</artifactId>
-            <version>1.1.0</version>
-        </dependency> -->
 		<dependency>
 			<groupId>com.epam.jdi</groupId>
 			<artifactId>jdi-uitest-web</artifactId>
@@ -48,9 +36,6 @@
             			<suiteXmlFile>src/test/resources/${suiteXmlFile}</suiteXmlFile>
           			</suiteXmlFiles>
           			<testFailureIgnore>false</testFailureIgnore>
-                    <argLine>
-                        -javaagent:C:\Users\Konstantin_Mazurin\.m2\repository/org/aspectj/aspectjweaver/1.7.4/aspectjweaver-1.7.4.jar
-                    </argLine>
         		</configuration>
         		<dependencies>
                 <dependency>
@@ -104,6 +89,9 @@
         		<password>p@ssw0rd</password>
         		<mld.password>mldp@ssw0rd</mld.password>
       		</properties>
+      		<activation>
+      			<activeByDefault>true</activeByDefault>
+      		</activation>
     	</profile>
     	<profile>
       		<id>azure</id>
@@ -121,16 +109,13 @@
       		<id>local</id>
       		<properties>
         		<env>local</env>
-        		<domain>http://eprupetw6500.petersburg.epam.com:8080/index.html#</domain>
+        		<domain>localhost:8080/index.html#</domain>
         		<browser.name>chrome</browser.name>
         		<sila.name>EPRUPETW6500</sila.name>
         		<username>user1</username>
         		<password>For$tarters-239</password>
         		<mld.password>For$tarters-239</mld.password>
       		</properties>
-      		<activation>
-        		<activeByDefault>true</activeByDefault>
-      		</activation>
     	</profile>
     </profiles>
   

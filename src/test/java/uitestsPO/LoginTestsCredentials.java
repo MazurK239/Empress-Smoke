@@ -42,7 +42,7 @@ public class LoginTestsCredentials extends InitTest{
 	}
 	
 	@Test
-	public void successfullLoginSubmit() {
+	public void successfulLoginSubmit() {
 		loginPage.loginAs(USERNAME, PASSWORD);
 		landingPage.checkOpened();
 		landingPage.logout();
@@ -50,7 +50,7 @@ public class LoginTestsCredentials extends InitTest{
 	}
 	
 	@Test
-	public void successfullLoginEnter() {
+	public void successfulLoginEnter() {
 		loginPage.loginAsReturn(USERNAME, PASSWORD);
 		landingPage.checkOpened();
 		landingPage.logout();

@@ -19,7 +19,7 @@ public class LoginTestsCheckbox extends InitTest {
 		loginPage.loginAs(USERNAME, PASSWORD);
 		landingPage.checkOpened();
 		landingPage.logout();
-		assertTrue(loginPage.getEnteredUser().equals("user1"));
+		assertTrue(loginPage.getEnteredUser().equals(USERNAME));
 	}
 
 	@Test

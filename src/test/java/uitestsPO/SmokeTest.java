@@ -15,22 +15,24 @@ import com.epam.web.matcher.verify.Verify;
 import static sites.EmpressSite.*;
 import enums.ExpDashboardTabs;
 import enums.MonitoringTabs;
-import enums.VisDashboardTabs;
+import sections.acuisition.AnalysisSettingsTab;
 import enums.PlateAnalysisViews;
 
 public class SmokeTest extends InitTest {
 
+	private static final List<String> STAINS = Arrays.asList("Cy5", "Off", "TRITC", "FITC", "Capture first");
 	private static final String ANALYSIS_NAME = "Live Cells";
 	private static final int[] LABWARE_GEOMETRY = {12,8};
 	private static final String LABWARE_NAME = Integer.toString(LABWARE_GEOMETRY[0] * LABWARE_GEOMETRY[1]) + " Well Plate";
 	private static final List<String> WELLS = Arrays.asList("E7", "E8", "E9", "E10");
 	private static final String PROTOCOL_NAME = "Test Protocol";
-	private static final String EXPERIMENT_NAME = "Auto Test Run " + System.currentTimeMillis();
+	private static final String EXPERIMENT_NAME = "Auto Test Run 1487063992204"; //"Auto Test Run " + System.currentTimeMillis();
 	
 	
 	@BeforeSuite
 	public void login() {
-		loginPage.isOpened();
+		loginPage.open();
+		loginPage.checkOpened();
 		loginPage.loginAsReturn(USERNAME, PASSWORD);
 		landingPage.checkOpened();
 	}
@@ -43,10 +45,10 @@ public class SmokeTest extends InitTest {
 	@Test
 	public void createProtocol() {
 		landingPage.openDataAcquisitionPage();
-		experimentTemplatesPage.selectTab(ExpDashboardTabs.TEMPLATES);
+		experimentTemplatesPage.selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		experimentPage.checkOpened();
-		experimentPage.createProtocol(DEVICE_NAME, LABWARE_NAME, Arrays.asList("Cy5", "DAPI", "TRITC", "FITC", "First"), 
+		experimentPage.createProtocol(DEVICE_NAME, LABWARE_NAME, STAINS, 
 				                      "4x", true, ANALYSIS_NAME, PROTOCOL_NAME, "For automation needs");
 		assertTrue(experimentPage.isSuccessfulSave());
 		experimentPage.goHome().openDataAcquisitionPage();
@@ -54,19 +56,16 @@ public class SmokeTest extends InitTest {
 		assertTrue(experimentTemplatesPage.findProtocol(PROTOCOL_NAME) != null);
 	}
 	
-	@Test(dependsOnMethods={"createProtocol"})
+	@Test (dependsOnMethods={"createProtocol"})
 	public void verifyProtocol() {
 		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.PROTOCOLS);
 		experimentTemplatesPage.findProtocol(PROTOCOL_NAME).open();
 		verify.isTrue(() -> experimentPage.selectDeviceTab.getSelectedDeviceName().equals(DEVICE_NAME));
 		verify.isTrue(() -> experimentPage.openAcquisitionTab().getSelectedLabwareName().equals(LABWARE_NAME));
-		experimentPage.openAcquisitionTab().capture();
-//		experimentPage.acquisitionTab.waitImageLoaded("sila");
-//		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cy5", "DAPI", "TRITC", "FITC", "TL")));
 		verify.isTrue(() -> experimentPage.openAnalysisSettingsTab().getSelectedAnalysisName().equals(ANALYSIS_NAME));
 		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 3);
 		experimentPage.analysisSettingsTab.runTestAnalysis();
-//		verify.isTrue(() -> experimentPage.acquisitionTab.canvas.areChannelsEnabled(Arrays.asList("Cell")));
+		Assert.isTrue(() -> !experimentPage.analysisSettingsTab.expandSumMeasurements().values.get(0).getValue().equals(""));
 		Assert.isEmpty(Verify.getFails());
 	}
 	
@@ -89,9 +88,9 @@ public class SmokeTest extends InitTest {
 		Assert.assertTrue(() -> monitoringPage.hasSucceeded(EXPERIMENT_NAME));
 	}
 	
-	@Test(dependsOnMethods={"runProtocol"})
+	@Test //(dependsOnMethods={"runProtocol"})
 	public void verifyExperiment() {
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).choose("Acquired images").view();
 		assertTrue(() -> viewAnalysisPage.thumbView.isMainControlDisplayed());
 		viewAnalysisPage.navigateToWellView(PlateAnalysisViews.IMAGES);
@@ -107,7 +106,7 @@ public class SmokeTest extends InitTest {
 	
 	@Test(dependsOnMethods={"verifyExperiment"}, alwaysRun=true)
 	public void deleteExperiment() {
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.deleteExperiment().confirm();
 		dashboardPage.checkOpened();

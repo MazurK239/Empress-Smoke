@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import com.epam.jdi.uitests.web.selenium.elements.common.Button;
+import com.epam.jdi.uitests.web.selenium.elements.common.Text;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
 import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
@@ -14,6 +15,9 @@ public class MeasurementsPanel extends Section {
 	
 	@FindBy(xpath="//input[@type='checkbox']")
 	private Elements<MldCheckbox> measurements;
+	
+	@FindBy(css=".measurements-container .measurement-value")
+	public Elements<Text> values;
 
 	public void deselectAll() {
 		selDeselAll.click();
@@ -46,5 +50,6 @@ public class MeasurementsPanel extends Section {
 			measurements.get(measurements.size() - 1).uncheckIt();
 		}
 	}
+
 
 }

@@ -19,7 +19,7 @@ public class MiscAcquisitionTests extends InitTest {
 
 	@Test(groups={"general"})
 	public void redirectBack() {
-		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES).findTemplate(TEMPLATE_NAME).open();
+		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL).findTemplate(TEMPLATE_NAME).open();
 		experimentPage.goToDashboard();
 		experimentTemplatesPage.back();
 		landingPage.checkOpened();
@@ -27,7 +27,7 @@ public class MiscAcquisitionTests extends InitTest {
 
 	@Test(groups={"general"})
 	public void redirectInvalidURL() {
-		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES).findTemplate(TEMPLATE_NAME).open();
+		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL).findTemplate(TEMPLATE_NAME).open();
 		String url = experimentPage.url;
 		url += "239";
 		experimentPage.getDriver().get(url);

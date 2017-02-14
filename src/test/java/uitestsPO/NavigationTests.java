@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import com.epam.commons.Timer;
 
 import enums.PlateAnalysisViews;
-import enums.VisDashboardTabs;
 
 import static sites.EmpressSite.*;
 
@@ -25,7 +24,7 @@ public class NavigationTests extends InitTest {
 	
 	@Test
 	public void cellLevelDropDown() {
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment("Some experiment").choose("Cell Count").view();
 		viewAnalysisPage.thumbView.selectWells(Arrays.asList("C4"), new int[]{6,4});
 		viewAnalysisPage.leftNavPanel.goToCellHeatmap();

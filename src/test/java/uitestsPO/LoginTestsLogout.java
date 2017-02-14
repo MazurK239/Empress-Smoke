@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import enums.ExpDashboardTabs;
-import enums.VisDashboardTabs;
 
 public class LoginTestsLogout extends InitTest {
 
@@ -18,7 +17,7 @@ public class LoginTestsLogout extends InitTest {
 	@Test
 	public void manualLogoutAcq() {
 		loginPage.loginAs(USERNAME, PASSWORD);
-		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.TEMPLATES);
+		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		experimentPage.logout();
 		loginPage.checkOpened();
@@ -29,7 +28,7 @@ public class LoginTestsLogout extends InitTest {
 	@Test
 	public void manualLogoutVis() {
 		loginPage.loginAs(USERNAME, PASSWORD);
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment("Real Analysis").view();
 		viewAnalysisPage.openEditEntity();
 		experimentPage.logout();
@@ -44,7 +43,7 @@ public class LoginTestsLogout extends InitTest {
 		landingPage.openUserPrefs();
 		userSettingsPage.openMiscTab().setSessionTimeout(5);
 		userSettingsPage.goBack();
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment("Real Analysis").view();
 		Thread.sleep(360*1000);
 		viewAnalysisPage.openEditEntity();
@@ -59,7 +58,7 @@ public class LoginTestsLogout extends InitTest {
 		landingPage.openUserPrefs();
 		userSettingsPage.openMiscTab().setSessionTimeout(5);
 		userSettingsPage.goBack();
-		landingPage.openDataVisualizationPage().selectTab(VisDashboardTabs.EXPERIMENTS);
+		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment("Real Analysis").view();
 		Thread.sleep(360*1000);
 		viewAnalysisPage.openEditEntity();

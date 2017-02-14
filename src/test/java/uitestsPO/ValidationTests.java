@@ -24,7 +24,7 @@ public class ValidationTests extends InitTest {
 	
 	@BeforeMethod
 	public void openTemplate() {
-		experimentTemplatesPage.selectTab(ExpDashboardTabs.TEMPLATES);
+		experimentTemplatesPage.selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		experimentPage.openDeviceTab().setDevice(DEVICE_NAME);		
 	}

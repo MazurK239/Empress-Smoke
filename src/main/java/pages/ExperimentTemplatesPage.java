@@ -17,7 +17,7 @@ public class ExperimentTemplatesPage extends InternalPage {
 	@FindBy(xpath="//ul/li[contains(@class, 'general-controls-item')]")
 	private Elements<Button> tabs;
 	
-	@FindBy(xpath="//*[@class='tab-content']/div[3]//mld-experiment-template")
+	@FindBy(xpath="//*[@class='tab-content']/div[1]//mld-experiment-template")
 	private Elements<ProtocolTile> protocols;
 
 	@FindBy(xpath="//*[@class='tab-content']/div[2]//mld-experiment-template")

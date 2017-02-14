@@ -50,14 +50,11 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css="mld-analysis-parameters")
 	public AlgInputPanel algorithmInputPanel;
 
-	@FindBy(css=".acq-labware-controls> button:last-of-type")
+	@FindBy(css=".acq-labware-controls button:nth-of-type(3)")
 	private MldToggler algorithmInputPanelToggler;
 
 	@FindBy(css=".acq-labware-controls button:first-of-type")
 	private Clickable runTestAnalysisButton;
-
-//	@FindBy(css=".acq-labware-controls .general-panel-button-acq-capture")
-//	private Clickable captureButton;
 
 
 	public AnalysisSettingsTab doAnalysis(boolean doAnalysis) {
