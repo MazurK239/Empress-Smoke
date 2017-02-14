@@ -89,9 +89,6 @@
         		<password>p@ssw0rd</password>
         		<mld.password>mldp@ssw0rd</mld.password>
       		</properties>
-      		<activation>
-      			<activeByDefault>true</activeByDefault>
-      		</activation>
     	</profile>
     	<profile>
       		<id>azure</id>
@@ -116,6 +113,9 @@
         		<password>For$tarters-239</password>
         		<mld.password>For$tarters-239</mld.password>
       		</properties>
+      		<activation>
+      			<activeByDefault>true</activeByDefault>
+      		</activation>
     	</profile>
     </profiles>
   

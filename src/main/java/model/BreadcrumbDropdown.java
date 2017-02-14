@@ -7,7 +7,7 @@ import com.epam.jdi.uitests.web.selenium.elements.common.Text;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
 import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
-import enums.PlateAnalysisViews;
+import enums.AnalysisViews;
 
 public class BreadcrumbDropdown extends Section {
 
@@ -25,7 +25,7 @@ public class BreadcrumbDropdown extends Section {
 		expander.click();		
 	}
 
-	public void select(PlateAnalysisViews view) {
+	public void select(AnalysisViews view) {
 		if (chosenOption.getText().equals(view.toString())) {
 			chosenOption.clickCenter();
 		} else {

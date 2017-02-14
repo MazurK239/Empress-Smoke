@@ -2,9 +2,7 @@ package pages;
 
 import org.openqa.selenium.support.FindBy;
 
-import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
-
-import enums.PlateAnalysisViews;
+import enums.AnalysisViews;
 import model.BreadcrumbDropdown;
 import model.NavPanel;
 import sections.visualization.CellDeepZoomSection;
@@ -17,12 +15,6 @@ import sections.visualization.HeatmapSection;
 import sections.visualization.ThumbViewSection;
 
 public class ViewAnalysisPage extends InternalPage {
-
-	@FindBy(xpath="//mld-breadcrumb-menu//li[last()-4]//mld-breadcrumb-menu-dropdown-item")
-	private BreadcrumbDropdown wellLevelDropdown;
-
-	@FindBy(xpath="//mld-breadcrumb-menu//li[last()-5]//mld-breadcrumb-menu-dropdown-item")
-	private BreadcrumbDropdown cellLevelDropdown;
 	
 	@FindBy(xpath="//mld-breadcrumb-menu//li[last()-3]//mld-breadcrumb-menu-dropdown-item")
 	private BreadcrumbDropdown analysisDropdown;
@@ -54,20 +46,17 @@ public class ViewAnalysisPage extends InternalPage {
 	@FindBy(css="mld-left-navigation-panel")
 	public NavPanel leftNavPanel;
 
-	public void navigateToWellView(PlateAnalysisViews view) {
-		wellLevelDropdown.select(view);
-	}
-
-	public void navigateToCellView(PlateAnalysisViews view) {
-		cellLevelDropdown.select(view);
-	}
-
+	
 	public void switchTo(String analysis) {
 		analysisDropdown.select(analysis);	
 	}
 
 	public void openEditEntity() {
 		this.breadcrumbsMenu.get(this.breadcrumbsMenu.size() - 3).click();
+	}
+
+	public void navigateTo(AnalysisViews view) {
+		leftNavPanel.open(view);
 	}
 
 

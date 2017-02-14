@@ -15,8 +15,7 @@ import com.epam.web.matcher.verify.Verify;
 import static sites.EmpressSite.*;
 import enums.ExpDashboardTabs;
 import enums.MonitoringTabs;
-import sections.acuisition.AnalysisSettingsTab;
-import enums.PlateAnalysisViews;
+import enums.AnalysisViews;
 
 public class SmokeTest extends InitTest {
 
@@ -56,7 +55,7 @@ public class SmokeTest extends InitTest {
 		assertTrue(experimentTemplatesPage.findProtocol(PROTOCOL_NAME) != null);
 	}
 	
-	@Test (dependsOnMethods={"createProtocol"})
+	@Test(dependsOnMethods={"createProtocol"})
 	public void verifyProtocol() {
 		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.PROTOCOLS);
 		experimentTemplatesPage.findProtocol(PROTOCOL_NAME).open();
@@ -88,19 +87,19 @@ public class SmokeTest extends InitTest {
 		Assert.assertTrue(() -> monitoringPage.hasSucceeded(EXPERIMENT_NAME));
 	}
 	
-	@Test //(dependsOnMethods={"runProtocol"})
+	@Test(dependsOnMethods={"runProtocol"})
 	public void verifyExperiment() {
 		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).choose("Acquired images").view();
 		assertTrue(() -> viewAnalysisPage.thumbView.isMainControlDisplayed());
-		viewAnalysisPage.navigateToWellView(PlateAnalysisViews.IMAGES);
+		viewAnalysisPage.navigateTo(AnalysisViews.IMAGES);
 		assertTrue(() -> viewAnalysisPage.deepZoom.checkWells(WELLS));
 		viewAnalysisPage.switchTo(EXPERIMENT_NAME);
 		assertTrue(() -> viewAnalysisPage.deepZoom.areZonesDisplayed(1));
-		viewAnalysisPage.navigateToWellView(PlateAnalysisViews.HEATMAP);
+		viewAnalysisPage.navigateTo(AnalysisViews.HEATMAP);
 		assertTrue(() -> viewAnalysisPage.heatmap.isMainControlDisplayed());
 		viewAnalysisPage.heatmap.selectWells(WELLS, LABWARE_GEOMETRY);
-		viewAnalysisPage.leftNavPanel.goToCellHeatmap();
+		viewAnalysisPage.navigateTo(AnalysisViews.CELL_HEATMAP);
 		assertTrue(() -> viewAnalysisPage.cellHeatmap.isMainControlDisplayed());
 	}
 	

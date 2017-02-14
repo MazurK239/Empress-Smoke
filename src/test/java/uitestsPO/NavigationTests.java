@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import com.epam.commons.Timer;
 
-import enums.PlateAnalysisViews;
+import enums.AnalysisViews;
 
 import static sites.EmpressSite.*;
 
@@ -27,18 +27,18 @@ public class NavigationTests extends InitTest {
 		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment("Some experiment").choose("Cell Count").view();
 		viewAnalysisPage.thumbView.selectWells(Arrays.asList("C4"), new int[]{6,4});
-		viewAnalysisPage.leftNavPanel.goToCellHeatmap();
+		viewAnalysisPage.navigateTo(AnalysisViews.CELL_HEATMAP);;
 		assertTrue(() -> viewAnalysisPage.cellHeatmap.isMainControlDisplayed());
-		viewAnalysisPage.navigateToCellView(PlateAnalysisViews.CELL_STACKED);
+		viewAnalysisPage.navigateTo(AnalysisViews.CELL_STACKED);
 		assertTrue(() -> viewAnalysisPage.cellStacked.isMainControlDisplayed());
-		viewAnalysisPage.navigateToCellView(PlateAnalysisViews.CELL_HEATMAP);
+		viewAnalysisPage.navigateTo(AnalysisViews.CELL_HEATMAP);
 		Timer.waitCondition(() -> viewAnalysisPage.cellHeatmap.isMainControlDisplayed());
 		viewAnalysisPage.cellHeatmap.selectAreaOnHeatmap("56", "85", new int[]{20,16});
-		viewAnalysisPage.navigateToCellView(PlateAnalysisViews.CELL_IMAGES);
+		viewAnalysisPage.navigateTo(AnalysisViews.CELL_IMAGES);
 		assertTrue(() -> viewAnalysisPage.cellDeepZoom.isMinimapDisplayed());
-		viewAnalysisPage.navigateToCellView(PlateAnalysisViews.CELL_TABLE);
+		viewAnalysisPage.navigateTo(AnalysisViews.CELL_TABLE);
 		assertTrue(() -> viewAnalysisPage.cellTable.isMainControlDisplayed());
-		viewAnalysisPage.navigateToWellView(PlateAnalysisViews.THUMBS);
+		viewAnalysisPage.navigateTo(AnalysisViews.THUMBS);
 		assertTrue(() -> viewAnalysisPage.thumbView.isMainControlDisplayed());
 		viewAnalysisPage.goHome();
 	}

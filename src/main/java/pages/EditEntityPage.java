@@ -12,16 +12,16 @@ import model.SharingPanel;
 
 public class EditEntityPage extends InternalPage {
 
-	@FindBy(xpath="//button[@title='Delete Experiment']")
+	@FindBy(xpath="//button[@ng-click='vm.actions.deleteExperiment()']")
 	private Button deleteExperimentButton;
 	
-	@FindBy(xpath="//button[@title='Experiment Properties']")
+	@FindBy(css="mld-entity-buttons-panel > button:last-of-type")
 	private Button experimentProperties;	
 	
 	@FindBy(css=".modal-dialog")
 	private MldPopup confirmation;
 
-	@FindBy(xpath="//button[@title='Share']")
+	@FindBy(css="mld-entity-settings-panel .general-button-panel-right > button")
 	private MldToggler sharingToggler;
 
 	@FindBy(css="mld-user-acceptance-panel")

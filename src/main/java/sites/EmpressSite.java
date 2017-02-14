@@ -19,7 +19,7 @@ import pages.UserSettingsPage;
 import pages.ViewAnalysisPage;
 
 
-@JSite(domain = "http://empress.ggasoftware.com:8080/index.html#") //empress.ggasoftware.com:8080/index.html# http://eprupetw6500.petersburg.epam.com:8080/index.html#
+@JSite(domain = "http://eprupetw6500.petersburg.epam.com:8080/index.html#") //empress.ggasoftware.com:8080/index.html# http://eprupetw6500.petersburg.epam.com:8080/index.html#
 public class EmpressSite extends WebSite {
 
 	@JPage(urlCheckType=CheckPageTypes.CONTAIN, url="/login", title="Login")
