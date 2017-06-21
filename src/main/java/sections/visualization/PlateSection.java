@@ -16,7 +16,7 @@ public class PlateSection extends WellLevelSection {
 		int wellSize = (canvas.getWebElement().getSize().getWidth() - 41) / labwareGeometry[0];
 		for (String well : wells) {
 			char letter = well.substring(0, 1).charAt(0);
-			int yOffset = 41 + wellSize  * ((int)letter - (int)("A".charAt(0)));
+			int yOffset = 60 + wellSize  * ((int)letter - (int)("A".charAt(0)));
 			int xOffset = 41 + wellSize * (Integer.parseInt(well.substring(1)) - 1);
 			action.moveToElement(canvas.getWebElement(), xOffset, yOffset).click().build().perform();	
 		}

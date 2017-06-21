@@ -9,11 +9,10 @@ import static sites.EmpressSite.*;
 
 public class MiscAcquisitionTests extends InitTest {
 
-	private static final String TEMPLATE_NAME = "New Plate Acquisition";
-
 	@BeforeSuite
 	public void preconditions() {
-		loginPage.isOpened();
+		loginPage.open();
+		loginPage.checkOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);
 	}
 

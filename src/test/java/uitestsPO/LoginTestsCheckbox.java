@@ -2,6 +2,9 @@ package uitestsPO;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.epam.web.matcher.testng.Assert;
+
 import static com.epam.web.matcher.testng.Assert.*;
 
 import static sites.EmpressSite.*;
@@ -9,11 +12,17 @@ import static sites.EmpressSite.*;
 public class LoginTestsCheckbox extends InitTest {
 
 	@BeforeMethod
-	public void initTest() {		
-		loginPage.isOpened();
+	public void initTest() {
+		loginPage.open();
+		loginPage.checkOpened();
 	}
 	
-	@Test
+	@Test (priority=0)
+	public void initialState() {
+		Assert.isTrue(() -> !loginPage.checkbox.wetherChecked());
+	}
+	
+	@Test (priority=1)
 	public void checkedCheckbox() {
 		loginPage.checkCheckbox();
 		loginPage.loginAs(USERNAME, PASSWORD);
@@ -22,7 +31,7 @@ public class LoginTestsCheckbox extends InitTest {
 		assertTrue(loginPage.getEnteredUser().equals(USERNAME));
 	}
 
-	@Test
+	@Test (priority=1)
 	public void uncheckedCheckbox() {
 		loginPage.uncheckCheckbox();
 		loginPage.loginAs(USERNAME, PASSWORD);

@@ -1,4 +1,4 @@
-package sections.acuisition;
+package sections.acquisition;
 
 import java.util.List;
 //import org.sikuli.script.*;
@@ -67,7 +67,17 @@ public class AcquisitionTab extends Section {
 	
 	public List<String> getUnavailableStains() {
 		stainsToggler.turnOn();
-		return dropdowns.get(1).getUnavailableStains();
+		return dropdowns.get(0).getUnavailableStains();
+	}
+
+	public List<String> getAvailableStains() {
+		stainsToggler.turnOn();
+		return dropdowns.get(0).getAvailableStains();
+	}
+	
+	public List<String> getTLOptions() {
+		stainsToggler.turnOn();
+		return dropdowns.get(dropdowns.size() - 1).getAllOptions();
 	}
 
 	public AcquisitionTab setObjective(String objective) {
@@ -83,24 +93,6 @@ public class AcquisitionTab extends Section {
 		compareToggler.turnOff();
 		captureButton.click();
 	}
-
-//	public void waitImageLoaded(String device) {
-//		try{
-//			screen.setAutoWaitTimeout(10);
-//			switch (device) {
-//			case "sila":				
-//				screen.wait("skl_img/sila_snap.png");
-//				break;
-//			case "demo":				
-//				screen.wait("skl_img/demo_snap.png");
-//				break;
-//			default:
-//				break;
-//			}
-//		} catch(FindFailed e){
-//            e.printStackTrace();
-//		}
-//	}
 
 	public String getSelectedLabwareName() {
 		labwareToggler.turnOn();

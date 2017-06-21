@@ -1,4 +1,4 @@
-package sections.acuisition;
+package sections.acquisition;
 
 import org.openqa.selenium.support.FindBy;
 
@@ -9,10 +9,11 @@ import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 import model.AcquisitionSummary;
 import model.MldToggler;
 import model.SharingPanel;
+import static sites.EmpressSite.*;
 
 public class RunTab extends Section {
 
-	@FindBy(xpath="//button[@title='Run Experiment']")
+	@FindBy(css=".general-button-panel-right button:last-child")
 	private Button runButton;
 
 	@FindBy(xpath="//input[contains(@class,'name-input')]")
@@ -21,14 +22,14 @@ public class RunTab extends Section {
 	@FindBy(xpath="//textarea[contains(@class,'description-input')]")
 	private TextField experimentDescriptionField;
 	
-	@FindBy(xpath="//button[@title='Share Experiment']")
+	@FindBy(css=".general-button-panel-right button:nth-child(3)")
 	private MldToggler shareExperimentToggler;
 	
 	@FindBy(xpath="//mld-user-sharing-panel")
 	private SharingPanel experimentPermissionSection;
 
 	@FindBy(css="mld-experiment-validation")
-	private AcquisitionSummary validationSummary;
+	public AcquisitionSummary validationSummary;
 	
 	
 	public RunTab setExperimentName(String experimentName, String description) {
@@ -51,11 +52,7 @@ public class RunTab extends Section {
 		return experimentPermissionSection;
 	}
 	
-	public AcquisitionSummary getValidationSummary() {
-		return validationSummary;
-	}
-	
-	public boolean canRun() {
-		return runButton.getWebElement().isEnabled();
+	public boolean cannotRun() {
+		return experimentPage.hasMessage();
 	}
 }

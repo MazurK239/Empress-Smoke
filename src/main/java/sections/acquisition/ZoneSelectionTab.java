@@ -1,4 +1,4 @@
-package sections.acuisition;
+package sections.acquisition;
 
 import org.openqa.selenium.support.FindBy;
 
@@ -6,9 +6,9 @@ import com.epam.jdi.uitests.web.selenium.elements.base.Clickable;
 
 public class ZoneSelectionTab extends CanvasTab {
 
-	final int CANVAS_SIZE = 704;
-	final int MIN_ZONE_SIZE = 33;
-	final int MARGIN = 40;	
+	final int CANVAS_SIZE = 749;
+	final int MIN_ZONE_SIZE = 40;
+	final int MARGIN = 25;	
 
 	@FindBy(css=".general-button-panel-right > button:first-child")
 	protected Clickable addZoneButton;

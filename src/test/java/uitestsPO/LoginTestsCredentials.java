@@ -3,6 +3,8 @@ package uitestsPO;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.epam.web.matcher.testng.Assert;
+
 import util.UsersProvider;
 
 import static com.epam.web.matcher.testng.Assert.*;
@@ -13,7 +15,13 @@ public class LoginTestsCredentials extends InitTest{
 
 	@BeforeMethod
 	public void initTest() {		
-		loginPage.isOpened();
+		loginPage.open();
+		loginPage.checkOpened();
+	}
+	
+	@Test
+	public void initialState() {
+		Assert.isTrue(loginPage.getEnteredUser().equals(""));
 	}
 	
 	@Test

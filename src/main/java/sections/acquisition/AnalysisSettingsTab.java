@@ -1,4 +1,4 @@
-package sections.acuisition;
+package sections.acquisition;
 
 import org.openqa.selenium.support.FindBy;
 

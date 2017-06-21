@@ -1,4 +1,4 @@
-package sections.acuisition;
+package sections.acquisition;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +21,11 @@ public class DeviceTab extends Section {
 	}
 	
 	public DeviceTab setDevice(String device) {
-		devices.get(device).click();
+		for (Clickable item : devices) {
+			if (item.getWebElement().getText().contains(device)) {
+				item.click();
+			}
+		}
 		return this;
 	}
 

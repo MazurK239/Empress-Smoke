@@ -43,7 +43,7 @@ public class EmpressSite extends WebSite {
 	@JPage(urlCheckType=CheckPageTypes.CONTAIN, url="/visualization/experiment/", title="View Analysis")
 	public static ViewAnalysisPage viewAnalysisPage;
 	
-	@JPage(url="/monitoring", title="Monitor")
+	@JPage(url="/monitoring", title="Status")
 	public static MonitoringPage monitoringPage;
 	
 	@JPage(url="/config", title="Configuration Settings")

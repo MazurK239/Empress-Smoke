@@ -10,7 +10,7 @@ public class MiscTab extends Section {
 	
 	private Actions action = new Actions(this.getDriver());
 
-	@FindBy(xpath="./*/*/*/*/*[@class='noUi-base']")
+	@FindBy(xpath="./*[3]/*/*/*/*[@class='noUi-base']")
 	private Clickable timeoutSlider;
 	
 	public void setSessionTimeout(int minutes) {

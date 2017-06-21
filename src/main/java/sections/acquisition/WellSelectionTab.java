@@ -1,4 +1,4 @@
-package sections.acuisition;
+package sections.acquisition;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 
 public class WellSelectionTab extends CanvasTab {
 
-	@FindBy(xpath="//button[@title='Select all']")
+	@FindBy(css=".general-button-panel-right > button:first-of-type")
 	private Button selectAllButton;
 
 	public WellSelectionTab selectWells(List<String> wells) {

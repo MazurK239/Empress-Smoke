@@ -6,7 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 import com.epam.jdi.uitests.web.selenium.elements.common.Text;
 import com.epam.jdi.uitests.web.selenium.elements.common.TextField;
+import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 import com.epam.jdi.uitests.web.selenium.elements.composite.WebPage;
+import com.epam.web.matcher.testng.Assert;
 
 import model.MldCheckbox;
 
@@ -31,7 +33,10 @@ public class LoginPage extends WebPage {
 	private Text incorrectError;
 
 	@FindBy(xpath="//*[@type='checkbox']")
-	private MldCheckbox checkbox;
+	public MldCheckbox checkbox;
+
+	@FindBy(css=".login-form")
+	private Section loginForm;
 	
 	public void loginAs(String username, String password) {
 		usernameField.newInput(username);
@@ -39,21 +44,17 @@ public class LoginPage extends WebPage {
 		submitButton.click();
 	}
 
-
 	public Boolean loginErrorPresent() {
 		return loginError.isDisplayed();
 	}
-
 
 	public Boolean passwordErrorPresent() {
 		return passwordError.isDisplayed();
 	}
 
-
 	public Boolean incorrectErrorPresent() {
 		return incorrectError.isDisplayed();
 	}
-
 
 	public void checkCheckbox() {
 		checkbox.checkIt();		
@@ -62,15 +63,21 @@ public class LoginPage extends WebPage {
 	public void uncheckCheckbox() {
 		checkbox.uncheckIt();		
 	}
+	
 
 	public String getEnteredUser() {
 		return usernameField.getAttribute("value");
 	}
 
-
 	public void loginAsReturn(String username, String password) {
 		usernameField.newInput(username);
 		passwordField.newInput(password + Keys.RETURN);
+	}
+
+	@Override
+	public void checkOpened() {
+		super.checkOpened();
+		Assert.isTrue(() -> loginForm.isDisplayed());
 	}
 
 }

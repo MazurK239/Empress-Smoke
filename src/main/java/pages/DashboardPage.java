@@ -9,6 +9,8 @@ import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
 
 import model.ExperimentTile;
+import model.DashboardFilterSection;
+
 import static sites.EmpressSite.editEntityPage;
 
 public class DashboardPage extends InternalPage {
@@ -21,6 +23,9 @@ public class DashboardPage extends InternalPage {
 
 	@FindBy(xpath="//*[@class='tab-content']//mld-plate-item[1]")
 	private ExperimentTile simpleExperimentTile;
+
+	@FindBy(css=".dashboard-vis-controls-filters")
+	private DashboardFilterSection filterPanel;
 
 	public ExperimentTile findExperiment(String experimentName) {
 		return first(experiments, el -> el.getTileName().equals(experimentName));
@@ -40,10 +45,18 @@ public class DashboardPage extends InternalPage {
 	public void deleteExperiment(String experimentName) {
 		try{
 			this.findExperiment(experimentName).open();
-			editEntityPage.deleteExperiment().confirm();
+			editEntityPage.openExperimentProperties().deleteExperiment();
+			editEntityPage.confirm();
 		} catch (NullPointerException e) {
-			System.out.println("The experiment " + experimentName + " culdn't be deleted, because it doesn't exist");
+			System.out.println("The experiment " + experimentName + " couldn't be deleted, because it doesn't exist");
 		}
 		
+	}
+
+	public ExperimentTile findFirstGoodExperiment() {
+		this.filterPanel.recent();
+		this.filterPanel.expandFilterPanel().hasImages();
+		this.filterPanel.expandFilterPanel().hasAnalysis();
+		return experiments.get(0);
 	}
 }

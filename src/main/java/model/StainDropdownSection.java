@@ -16,8 +16,14 @@ public class StainDropdownSection extends Section {
 	@FindBy(xpath="./select")
 	private Dropdown dropdown = new Dropdown(By.xpath("."), By.cssSelector("option"));
 	
-	@FindBy(xpath="./select/optgroup[@label='Not Available']/option")
+	@FindBy(xpath="./select/optgroup[3]/option")
 	private Elements<Text> unavailableStains;
+	
+	@FindBy(xpath="./select/optgroup[2]/option")
+	private Elements<Text> availableStains;
+
+	@FindBy(css="option")
+	private Elements<Text> allOptions;
 	
 	public void expand() {
 		dropdown.expand();
@@ -37,6 +43,22 @@ public class StainDropdownSection extends Section {
 			stains.add(uStain.getText());
 		}
 		return stains;
+	}
+
+	public List<String> getAvailableStains() {
+		List<String> stains = new ArrayList<String>();
+		for (Text uStain : availableStains) {
+			stains.add(uStain.getText());
+		}
+		return stains;
+	}
+
+	public List<String> getAllOptions() {		
+		List<String> options = new ArrayList<String>();
+		for (Text uStain : allOptions) {
+			options.add(uStain.getText());
+		}
+		return options;
 	}
 	
 	

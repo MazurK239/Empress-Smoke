@@ -19,13 +19,13 @@ import enums.AnalysisViews;
 
 public class SmokeTest extends InitTest {
 
-	private static final List<String> STAINS = Arrays.asList("Cy5", "Off", "TRITC", "FITC", "Capture first");
-	private static final String ANALYSIS_NAME = "Live Cells";
+	private static List<String> STAINS;
+	private static final String ANALYSIS_NAME = "Cell Count";
 	private static final int[] LABWARE_GEOMETRY = {12,8};
 	private static final String LABWARE_NAME = Integer.toString(LABWARE_GEOMETRY[0] * LABWARE_GEOMETRY[1]) + " Well Plate";
 	private static final List<String> WELLS = Arrays.asList("E7", "E8", "E9", "E10");
 	private static final String PROTOCOL_NAME = "Test Protocol";
-	private static final String EXPERIMENT_NAME = "Auto Test Run 1487063992204"; //"Auto Test Run " + System.currentTimeMillis();
+	private static final String EXPERIMENT_NAME = "Auto Test Run 1497529341258"; //"Auto Test Run " + System.currentTimeMillis();
 	
 	
 	@BeforeSuite
@@ -34,6 +34,7 @@ public class SmokeTest extends InitTest {
 		loginPage.checkOpened();
 		loginPage.loginAsReturn(USERNAME, PASSWORD);
 		landingPage.checkOpened();
+		initStainLists();
 	}
 
 	@BeforeMethod
@@ -43,10 +44,12 @@ public class SmokeTest extends InitTest {
 
 	@Test
 	public void createProtocol() {
+		STAINS = AVAILABLE_STAINS.subList(4, 8);
 		landingPage.openDataAcquisitionPage();
 		experimentTemplatesPage.selectTab(ExpDashboardTabs.ADD_PROTOCOL);
-		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
+		experimentTemplatesPage.findTemplate(TEMPLATE_NAME).open();
 		experimentPage.checkOpened();
+		STAINS.add(TL_OPTIONS.get(1));
 		experimentPage.createProtocol(DEVICE_NAME, LABWARE_NAME, STAINS, 
 				                      "4x", true, ANALYSIS_NAME, PROTOCOL_NAME, "For automation needs");
 		assertTrue(experimentPage.isSuccessfulSave());
@@ -59,12 +62,13 @@ public class SmokeTest extends InitTest {
 	public void verifyProtocol() {
 		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.PROTOCOLS);
 		experimentTemplatesPage.findProtocol(PROTOCOL_NAME).open();
-		verify.isTrue(() -> experimentPage.selectDeviceTab.getSelectedDeviceName().equals(DEVICE_NAME));
+		verify.isTrue(() -> experimentPage.selectDeviceTab.getSelectedDeviceName().contains(DEVICE_NAME));
 		verify.isTrue(() -> experimentPage.openAcquisitionTab().getSelectedLabwareName().equals(LABWARE_NAME));
 		verify.isTrue(() -> experimentPage.openAnalysisSettingsTab().getSelectedAnalysisName().equals(ANALYSIS_NAME));
 		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 3);
 		experimentPage.analysisSettingsTab.runTestAnalysis();
 		Assert.isTrue(() -> !experimentPage.analysisSettingsTab.expandSumMeasurements().values.get(0).getValue().equals(""));
+		experimentPage.goHome();
 		Assert.isEmpty(Verify.getFails());
 	}
 	
@@ -80,7 +84,7 @@ public class SmokeTest extends InitTest {
 		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.PROTOCOLS);
 		experimentTemplatesPage.findProtocol(PROTOCOL_NAME).run();
 		experimentPage.checkOpened();
-		experimentPage.runExperiment(0.5f, 0.5f, 0.5f, 0.5f, WELLS, EXPERIMENT_NAME, "For automation needs");
+		experimentPage.runExperiment(0.5f, 0.5f, 0.75f, 0.75f, WELLS, EXPERIMENT_NAME, "For automation needs");
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment(EXPERIMENT_NAME);
 		monitoringPage.tabs.select(MonitoringTabs.SUCCEEDED);
@@ -94,7 +98,7 @@ public class SmokeTest extends InitTest {
 		assertTrue(() -> viewAnalysisPage.thumbView.isMainControlDisplayed());
 		viewAnalysisPage.navigateTo(AnalysisViews.IMAGES);
 		assertTrue(() -> viewAnalysisPage.deepZoom.checkWells(WELLS));
-		viewAnalysisPage.switchTo(EXPERIMENT_NAME);
+		viewAnalysisPage.switchTo(ANALYSIS_NAME);
 		assertTrue(() -> viewAnalysisPage.deepZoom.areZonesDisplayed(1));
 		viewAnalysisPage.navigateTo(AnalysisViews.HEATMAP);
 		assertTrue(() -> viewAnalysisPage.heatmap.isMainControlDisplayed());
@@ -107,7 +111,8 @@ public class SmokeTest extends InitTest {
 	public void deleteExperiment() {
 		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
-		editEntityPage.deleteExperiment().confirm();
+		editEntityPage.openExperimentProperties().deleteExperiment();
+		editEntityPage.confirm();
 		dashboardPage.checkOpened();
 	}
 	

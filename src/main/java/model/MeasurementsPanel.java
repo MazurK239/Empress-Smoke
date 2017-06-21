@@ -10,7 +10,7 @@ import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
 public class MeasurementsPanel extends Section {
 
-	@FindBy(xpath="//button[text()='Select / Deselect All']")
+	@FindBy(css=".measurements-buttons > button:first-of-type")
 	private Button selDeselAll;
 	
 	@FindBy(xpath="//input[@type='checkbox']")

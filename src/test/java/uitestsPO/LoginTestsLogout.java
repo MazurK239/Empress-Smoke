@@ -18,7 +18,7 @@ public class LoginTestsLogout extends InitTest {
 	public void manualLogoutAcq() {
 		loginPage.loginAs(USERNAME, PASSWORD);
 		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL);
-		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
+		experimentTemplatesPage.findTemplate(TEMPLATE_NAME).open();
 		experimentPage.logout();
 		loginPage.checkOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);
@@ -29,7 +29,7 @@ public class LoginTestsLogout extends InitTest {
 	public void manualLogoutVis() {
 		loginPage.loginAs(USERNAME, PASSWORD);
 		landingPage.openDataVisualizationPage();
-		dashboardPage.findExperiment("Real Analysis").view();
+		dashboardPage.findFirstGoodExperiment().view();
 		viewAnalysisPage.openEditEntity();
 		experimentPage.logout();
 		loginPage.checkOpened();
@@ -44,9 +44,8 @@ public class LoginTestsLogout extends InitTest {
 		userSettingsPage.openMiscTab().setSessionTimeout(5);
 		userSettingsPage.goBack();
 		landingPage.openDataVisualizationPage();
-		dashboardPage.findExperiment("Real Analysis").view();
+		dashboardPage.findFirstGoodExperiment().view();
 		Thread.sleep(360*1000);
-		viewAnalysisPage.openEditEntity();
 		loginPage.checkOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);
 		editEntityPage.checkOpened();
@@ -59,9 +58,8 @@ public class LoginTestsLogout extends InitTest {
 		userSettingsPage.openMiscTab().setSessionTimeout(5);
 		userSettingsPage.goBack();
 		landingPage.openDataVisualizationPage();
-		dashboardPage.findExperiment("Real Analysis").view();
+		dashboardPage.findFirstGoodExperiment().view();
 		Thread.sleep(360*1000);
-		viewAnalysisPage.openEditEntity();
 		loginPage.checkOpened();
 		loginPage.loginAs("mld", MLDPASSWORD);
 		landingPage.checkOpened();

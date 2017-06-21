@@ -1,47 +1,66 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
-import com.epam.commons.Timer;
 import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 
 import model.MldPopup;
-import model.MldToggler;
-import model.SharingPanel;
+import sections.entity.EntityAcquisition;
+import sections.entity.EntityAnalyses;
+import sections.entity.EntityAnnotation;
+import sections.entity.EntitySettings;
 
 public class EditEntityPage extends InternalPage {
+	
+	@FindBy(css="mld-entity-buttons-panel > button:first-of-type")
+	private Button analysesIcon;	
 
-	@FindBy(xpath="//button[@ng-click='vm.actions.deleteExperiment()']")
-	private Button deleteExperimentButton;
+	@FindBy(css="mld-entity-buttons-panel > button:nth-of-type(2)")
+	private Button acquisitionPropertiesIcon;	
+	
+	@FindBy(css="mld-entity-buttons-panel > button:nth-of-type(3)")
+	private Button annotationsIcon;	
 	
 	@FindBy(css="mld-entity-buttons-panel > button:last-of-type")
-	private Button experimentProperties;	
+	private Button experimentPropertiesIcon;	
+		
 	
 	@FindBy(css=".modal-dialog")
 	private MldPopup confirmation;
+	
+	@FindBy(css="mld-entity-analysis-panel")
+	public EntityAnalyses analyses;
 
-	@FindBy(css="mld-entity-settings-panel .general-button-panel-right > button")
-	private MldToggler sharingToggler;
+	@FindBy(css="mld-entity-acquisition-panel")
+	public EntityAcquisition acquisitionProperties;
+	
+	@FindBy(css="mld-entity-annotation-panel")
+	public EntityAnnotation annotations;
+	
+	@FindBy(css="mld-entity-settings-panel")
+	public EntitySettings experimentProperties;
 
-	@FindBy(css="mld-user-acceptance-panel")
-	public SharingPanel sharingPanel;
+	public EntityAnalyses openAnalyses() {		
+		analysesIcon.click();
+		return analyses;
+	}
 
-	public EditEntityPage deleteExperiment() {
-		experimentProperties.click();
-		deleteExperimentButton.click();
-		return this;
+	public EntityAcquisition openAcquisitionProperties() {		
+		acquisitionPropertiesIcon.click();
+		return acquisitionProperties;
+	}
+	public EntityAnnotation openAnnotations() {		
+		annotationsIcon.click();
+		return annotations;
+	}
+	public EntitySettings openExperimentProperties() {		
+		experimentPropertiesIcon.click();
+		return experimentProperties;
 	}
 
 	public void confirm() {
 		confirmation.ok();
 	}
 
-	public SharingPanel expandSharingPanel() {
-		experimentProperties.click();
-		sharingToggler.turnOn();
-		Timer.waitCondition(() -> this.getDriver().findElement(By.cssSelector(".pinned-panel__header .pull-right")).isDisplayed());
-		return sharingPanel;
-	}
 
 }

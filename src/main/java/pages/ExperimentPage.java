@@ -3,7 +3,9 @@ package pages;
 import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 import com.epam.jdi.uitests.web.selenium.elements.common.Text;
 
-import sections.acuisition.*;
+import model.MldPopup;
+import sections.acquisition.*;
+import sites.EmpressSite;
 
 import java.util.List;
 
@@ -11,49 +13,49 @@ import org.openqa.selenium.support.FindBy;
 
 public class ExperimentPage extends InternalPage {
 	
-	@FindBy(xpath="//button[@title='Select Device']")
+	@FindBy(css=".general-button-panel-left div:nth-child(2) button")
 	public Button selectDeviceIcon;
 	
 	@FindBy(css="mld-experiment-device-panel")
 	public DeviceTab selectDeviceTab;
 
-	@FindBy(xpath="//button[@title='Acquisition']")
+	@FindBy(css=".general-button-panel-left div:nth-child(3) button")
 	public Button acquisitionIcon;
 
 	@FindBy(css="mld-experiment-acquisition-panel")
 	public AcquisitionTab acquisitionTab;
 
-	@FindBy(xpath="//button[@title='Zone Selection for Acquisition']")
+	@FindBy(css=".general-button-panel-left div:nth-child(4) button")
 	public Button acquisitionZonesIcon;
 
 	@FindBy(css="mld-experiment-wellarea-acquisition-panel")
 	public ZoneSelectionTab acquisitionZonesTab;
 
-	@FindBy(xpath="//button[@title='Analysis Settings']")
+	@FindBy(css=".general-button-panel-left div:nth-child(5) button")
 	public Button analysisSettingsIcon;
 
 	@FindBy(css="mld-experiment-analysis-panel")
 	public AnalysisSettingsTab analysisSettingsTab;
 
-	@FindBy(xpath="//button[@title='Zone Selection for Analysis']")
+	@FindBy(css=".general-button-panel-left div:nth-child(6) button")
 	public Button analysisZonesIcon;
 
 	@FindBy(css="mld-experiment-wellarea-analysis-panel")
 	public ZoneSelectionTab analysisZonesTab;
 
-	@FindBy(xpath="//button[@title='Well Selection']")
+	@FindBy(css=".general-button-panel-left div:nth-child(7) button")
 	public Button wellSelectionIcon;
 
 	@FindBy(css="mld-experiment-well-selection-panel")
 	public WellSelectionTab wellSelectionTab;
 
-	@FindBy(xpath="//mld-experiment-button-panel//button[@title='Save Protocol']")
+	@FindBy(css=".general-button-panel-left div:nth-child(9) button")
 	public Button saveIcon;
 
 	@FindBy(css="mld-experiment-save-panel")
 	public SaveTab saveTab;
 
-	@FindBy(xpath="//button[@title='Run Settings']")
+	@FindBy(css=".general-button-panel-left div:nth-child(10) button")
 	public Button runIcon;
 
 	@FindBy(css="mld-experiment-run-panel")
@@ -61,6 +63,9 @@ public class ExperimentPage extends InternalPage {
 
 	@FindBy(css=".global-message")
 	private Text message;
+
+	@FindBy(css="div.modal-dialog")
+	private MldPopup confirmation;
 	
 	public DeviceTab openDeviceTab() {
 		selectDeviceIcon.click();
@@ -139,5 +144,25 @@ public class ExperimentPage extends InternalPage {
 	public String getMessage() {
 		return message.getText();
 	}
+
+	public boolean hasMessage() {
+		return message.isDisplayed();
+	}
+	
+	@Override
+	public LandingPage goHome() {
+		breadcrumbsMenu.get(breadcrumbsMenu.size() - 1).click();
+		confirmation.ok();
+		EmpressSite.landingPage.checkOpened();
+		return EmpressSite.landingPage;
+	}
+
+	@Override
+	public void goToDashboard() {
+		breadcrumbsMenu.get(breadcrumbsMenu.size() - 2).click();
+		confirmation.ok();
+		EmpressSite.experimentTemplatesPage.checkOpened();
+	}
+
 
 }

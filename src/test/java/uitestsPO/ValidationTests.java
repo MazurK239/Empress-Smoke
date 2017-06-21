@@ -17,15 +17,18 @@ public class ValidationTests extends InitTest {
 
 	@BeforeSuite
 	public void loginAndNavigate() {
-		loginPage.isOpened();
+		loginPage.open();
+		loginPage.checkOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);
+		landingPage.checkOpened();
+		initStainLists();
 		landingPage.openDataAcquisitionPage();
 	}
 	
 	@BeforeMethod
 	public void openTemplate() {
 		experimentTemplatesPage.selectTab(ExpDashboardTabs.ADD_PROTOCOL);
-		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
+		experimentTemplatesPage.findTemplate(TEMPLATE_NAME).open();
 		experimentPage.openDeviceTab().setDevice(DEVICE_NAME);		
 	}
 	
@@ -37,31 +40,30 @@ public class ValidationTests extends InitTest {
 	
 	@Test
 	public void stainsValidation() {
-		String unavailableStain = experimentPage.openAcquisitionTab().getUnavailableStains().get(0);
-		experimentPage.openAcquisitionTab().setStains(Arrays.asList(unavailableStain, "DAPI", "Off", "Off", "Off"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Instrument"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Stains"));
-		experimentPage.openRunTab().getValidationSummary().openMessage("Stains");
+		experimentPage.openAcquisitionTab().setStains(Arrays.asList(UNAVAILABLE_STAINS.get(0), AVAILABLE_STAINS.get(0), "Off", "Off", "Off"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Instrument"));
+		assertTrue(() -> experimentPage.runTab.validationSummary.hasNotPassed("Stains"));
+		experimentPage.openRunTab().validationSummary.openMessage("Stains");
 		assertTrue(experimentPage.getMessage().contains("is not active."));
-		experimentPage.openAcquisitionTab().setStains(Arrays.asList("FITC", "DAPI", "Off", "Off", "Off"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasPassed("Instrument"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasPassed("Stains"));		
+		experimentPage.openAcquisitionTab().setStains(Arrays.asList(AVAILABLE_STAINS.get(0), AVAILABLE_STAINS.get(1), "Off", "Off", "Off"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasPassed("Instrument"));
+		assertTrue(() -> experimentPage.runTab.validationSummary.hasPassed("Stains"));		
 	}
 	
 	@Test
 	public void zonesValidation() {
 		experimentPage.openAcqZonesTab().clearAll();
 		experimentPage.openAnZonesTab().clearAll();
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Acquisition zones"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Analysis zones"));
-		experimentPage.openRunTab().getValidationSummary().openMessage("Acquisition zones");
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Acquisition zones"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Analysis zones"));
+		experimentPage.openRunTab().validationSummary.openMessage("Acquisition zones");
 		assertTrue(experimentPage.getMessage().contains("No acquisition zones selected."));
-		experimentPage.openRunTab().getValidationSummary().openMessage("Analysis zones");
+		experimentPage.openRunTab().validationSummary.openMessage("Analysis zones");
 		assertTrue(experimentPage.getMessage().contains("No analysis zones selected."));
 		experimentPage.openAcqZonesTab().addMinZone(0.5f, 0.5f);
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasPassed("Acquisition zones"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasPassed("Acquisition zones"));
 		experimentPage.openAnZonesTab().addMinZone(0.5f, 0.5f);
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasPassed("Analysis zones"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasPassed("Analysis zones"));
 	}
 	
 	@Test
@@ -69,54 +71,56 @@ public class ValidationTests extends InitTest {
 		experimentPage.openAnZonesTab().clearAll();
 		experimentPage.openAnalysisSettingsTab().expandCellMeasurements().deselectAll();
 		experimentPage.openAnalysisSettingsTab().expandSumMeasurements().deselectAll();
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Analysis zones"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Selected measurements"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().getRowByParam("Analysis services") != null);
-		experimentPage.openAcquisitionTab().setStains(Arrays.asList("Off", "DAPI", "Off", "Off", "Off"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Analysis zones"));
+		assertTrue(() -> experimentPage.runTab.validationSummary.hasNotPassed("Selected measurements"));
+		assertTrue(() -> experimentPage.runTab.validationSummary.getRowByParam("Analysis services") != null);
+		experimentPage.openAcquisitionTab().setStains(Arrays.asList("Off", AVAILABLE_STAINS.get(0), "Off", "Off", "Off"));
 		experimentPage.openWellSelectionTab().selectWells(Arrays.asList("A1"));
-		experimentPage.openRunTab().setExperimentName("aaa");
-		assertTrue(() -> !experimentPage.openRunTab().canRun());
+		experimentPage.openRunTab().setExperimentName("aaa").run();
+		assertTrue(() -> experimentPage.runTab.cannotRun());
 		experimentPage.openAnalysisSettingsTab().doAnalysis(false);
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().getRowByParam("Analysis zones") == null);
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().getRowByParam("Analysis services") == null);
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().getRowByParam("Selected measurements") == null);
-		assertTrue(() -> experimentPage.openRunTab().canRun());		
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.getRowByParam("Analysis zones") == null);
+		assertTrue(() -> experimentPage.runTab.validationSummary.getRowByParam("Analysis services") == null);
+		assertTrue(() -> experimentPage.runTab.validationSummary.getRowByParam("Selected measurements") == null);
 		experimentPage.openAnalysisSettingsTab().doAnalysis(true);
 	}
 	
 	@Test
 	public void wellsValidation() {
 		experimentPage.openWellSelectionTab().clearAll();
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Selected wells"));
-		assertTrue(() -> !experimentPage.openRunTab().canRun());
-		experimentPage.openRunTab().getValidationSummary().openMessage("Selected wells");
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Selected wells"));
+		experimentPage.runTab.run();
+		assertTrue(() -> experimentPage.runTab.cannotRun());
+		experimentPage.runTab.validationSummary.openMessage("Selected wells");
 		assertTrue(experimentPage.getMessage().contains("No wells selected."));
 		experimentPage.openWellSelectionTab().selectWells(Arrays.asList("A1"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasPassed("Selected wells"));		
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasPassed("Selected wells"));		
 	}
 	
 	@Test
 	public void measurementsValidation() {
 		experimentPage.openAnalysisSettingsTab().expandSumMeasurements().deselectAll();
 		experimentPage.openAnalysisSettingsTab().expandCellMeasurements().deselectAll();
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Selected measurements"));
-		assertTrue(() -> !experimentPage.openRunTab().canRun());
-		experimentPage.openRunTab().getValidationSummary().openMessage("Selected measurements");
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Selected measurements"));
+		experimentPage.runTab.run();
+		assertTrue(() -> experimentPage.runTab.cannotRun());
+		experimentPage.openRunTab().validationSummary.openMessage("Selected measurements");
 		assertTrue(experimentPage.getMessage().contains("At least one measurement needs to be selected."));
 		experimentPage.openAnalysisSettingsTab().expandCellMeasurements().selectSegmentation();
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasPassed("Selected measurements"));		
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasPassed("Selected measurements"));		
 	}
 	
 	@Test
 	public void locationAndStorageValidation() {
 		experimentPage.openAcquisitionTab().setLabware("6 Well Costar #3516")
 		                                   .setObjective("40x")
-		                                   .setStains(Arrays.asList("TRITC/Cy3", "DAPI", "TRITC", "FITC", "First"));
+		                                   .setStains(Arrays.asList(AVAILABLE_STAINS.get(0), AVAILABLE_STAINS.get(1), AVAILABLE_STAINS.get(2),
+		                                		   					AVAILABLE_STAINS.get(3), TL_OPTIONS.get(1)));
 		experimentPage.openAcqZonesTab().addMaxZone();
 		experimentPage.openWellSelectionTab().selectAll();
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Storage"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Location"));
-		assertTrue(() -> experimentPage.openRunTab().getValidationSummary().hasNotPassed("Instrument"));
+		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Storage"));
+		assertTrue(() -> experimentPage.runTab.validationSummary.hasNotPassed("Data Storage"));
+		assertTrue(() -> experimentPage.runTab.validationSummary.hasNotPassed("Instrument"));
 	}
 	
 }

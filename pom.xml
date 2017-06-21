@@ -82,12 +82,12 @@
       		<id>dev</id>
       		<properties>
         		<env>dev</env>
-        		<domain>http://empress.ggasoftware.com:8080/index.html#</domain>
+        		<domain>https://empress1.mld-idv.projects.epam.com/1.0/index.html#</domain>
         		<browser.name>chrome</browser.name>
         		<sila.name>EMPRESS</sila.name>
-        		<username>user1</username>
-        		<password>p@ssw0rd</password>
-        		<mld.password>mldp@ssw0rd</mld.password>
+        		<username>mld</username>
+        		<password>9x783x8vwr6Z</password>
+        		<mld.password>9x783x8vwr6Z</mld.password>
       		</properties>
     	</profile>
     	<profile>
