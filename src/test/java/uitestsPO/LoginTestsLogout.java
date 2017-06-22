@@ -44,7 +44,7 @@ public class LoginTestsLogout extends InitTest {
 		userSettingsPage.openMiscTab().setSessionTimeout(5);
 		userSettingsPage.goBack();
 		landingPage.openDataVisualizationPage();
-		dashboardPage.findFirstGoodExperiment().view();
+		dashboardPage.findFirstGoodExperiment().open();
 		Thread.sleep(360*1000);
 		loginPage.checkOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);

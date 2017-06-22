@@ -28,7 +28,7 @@ public class NavigationTests extends InitTest {
 		dashboardPage.findFirstGoodExperiment().open();
 		int[] geometry = editEntityPage.openAcquisitionProperties().getGeometry(); 
  		editEntityPage.openAnalyses().navigation.open(AnalysisViews.THUMBS);
-		viewAnalysisPage.thumbView.selectWells(Arrays.asList("C5"), geometry);
+		viewAnalysisPage.thumbView.selectWells(Arrays.asList("F12"), geometry);
 		viewAnalysisPage.navigateTo(AnalysisViews.CELL_HEATMAP);;
 		assertTrue(() -> viewAnalysisPage.cellHeatmap.isMainControlDisplayed());
 		viewAnalysisPage.navigateTo(AnalysisViews.CELL_STACKED);

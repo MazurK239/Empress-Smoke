@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import com.epam.jdi.uitests.web.selenium.elements.base.Clickable;
 import com.epam.jdi.uitests.web.selenium.elements.common.Text;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Dropdown;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
@@ -16,6 +17,9 @@ public class StainDropdownSection extends Section {
 	@FindBy(xpath="./select")
 	private Dropdown dropdown = new Dropdown(By.xpath("."), By.cssSelector("option"));
 	
+	@FindBy(xpath="./button")
+	private Clickable toggler;
+
 	@FindBy(xpath="./select/optgroup[3]/option")
 	private Elements<Text> unavailableStains;
 	
@@ -31,7 +35,9 @@ public class StainDropdownSection extends Section {
 	
 	public void selectStain(String stain) {
 		if ("Off".equals(stain)) {
-			dropdown.select("Off");
+			if (!toggler.getAttribute("style").equals("background-color: white;")) {
+				toggler.click();
+			}
 		} else {
 			dropdown.select(stain);
 		}
