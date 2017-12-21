@@ -13,10 +13,10 @@ import sites.EmpressSite;
 
 public class ProtocolTile extends Section {
 	
-	@FindBy(css=".dashboard-item__button_run")
+	@FindBy(css="button.dashboard-item__button:first-of-type")
 	private Button runButton;
 
-	@FindBy(css=".dashboard-item__button_delete")
+	@FindBy(css="button.dashboard-item__button:last-of-type")
 	private Button deleteButton;
 	
 	@FindBy(css=".dashboard-item-vis__link-part")
@@ -38,7 +38,11 @@ public class ProtocolTile extends Section {
 	}
 	
 	public ExperimentTemplatesPage delete() {
-		deleteButton.click();
+		try{
+			deleteButton.click();
+		} catch (NullPointerException e) {
+			System.out.println("The protocol couldn't be deleted, because it doesn't exist");
+		}
 		return EmpressSite.experimentTemplatesPage;
 	}
 	

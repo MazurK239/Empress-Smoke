@@ -14,7 +14,7 @@ import model.OSD;
 
 public class AnalysisSettingsTab extends Section {
 
-	@FindBy(css=".general-button-panel-right button:first-child.opening-marker")
+	@FindBy(css=".general-button-panel_right button:first-child")
 	private MldToggler chooseTemplateToggler;
 	
 	@FindBy(xpath="//mld-choose-template-panel//*[@type='checkbox']")
@@ -26,7 +26,7 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css=".selected .template-item__title")
 	private Elements<Clickable> selectedTemplate;
 
-	@FindBy(xpath="//button[@title='Measurements']")
+	@FindBy(css=".general-button-panel_right button:nth-child(2)")
 	private MldToggler measurementsToggler;
 	
 	@FindBy(xpath="//li[@heading='Summary Measurements']")
@@ -41,7 +41,7 @@ public class AnalysisSettingsTab extends Section {
 	@FindBy(css="mld-measurements-selector[measurement-type=cell]")
 	private MeasurementsPanel cellMeasurementsPanel;
 	
-	@FindBy(css=".general-button-panel-right button:nth-of-type(5)")
+	@FindBy(css=".general-button-panel_right button:nth-of-type(5)")
 	private MldToggler compareModeToggler;
 	
 	@FindBy(css="canvas")
@@ -104,12 +104,10 @@ public class AnalysisSettingsTab extends Section {
 		compareModeToggler.turnOn();
 		return this;		
 	}
-	
-//	public void capture() {
-//		captureButton.click();
-//	}
 
 	public void runTestAnalysis() {
 		runTestAnalysisButton.click();
 	}
+
+
 }

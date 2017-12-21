@@ -40,6 +40,10 @@ public class SmokeTest extends InitTest {
 	@BeforeMethod
 	public void openLanding() {
 		landingPage.open();
+		if (!experimentPage.confirmation.isDisplayed()) {
+			return;
+		}
+		experimentPage.confirmation.ok();
 	}
 
 	@Test
@@ -65,7 +69,7 @@ public class SmokeTest extends InitTest {
 		verify.isTrue(() -> experimentPage.selectDeviceTab.getSelectedDeviceName().contains(DEVICE_NAME));
 		verify.isTrue(() -> experimentPage.openAcquisitionTab().getSelectedLabwareName().equals(LABWARE_NAME));
 		verify.isTrue(() -> experimentPage.openAnalysisSettingsTab().getSelectedAnalysisName().equals(ANALYSIS_NAME));
-		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 3);
+		experimentPage.analysisSettingsTab.singleMode().openAlgorithmInputPanel().selectTab("Nuclei").setProperty("Min Width", 30);
 		experimentPage.analysisSettingsTab.runTestAnalysis();
 		Assert.isTrue(() -> !experimentPage.analysisSettingsTab.expandSumMeasurements().values.get(0).getValue().equals(""));
 		experimentPage.goHome();
@@ -84,7 +88,7 @@ public class SmokeTest extends InitTest {
 		landingPage.openDataAcquisitionPage().selectTab(ExpDashboardTabs.PROTOCOLS);
 		experimentTemplatesPage.findProtocol(PROTOCOL_NAME).run();
 		experimentPage.checkOpened();
-		experimentPage.runExperiment(0.5f, 0.5f, 0.75f, 0.75f, WELLS, EXPERIMENT_NAME, "For automation needs");
+		experimentPage.runExperiment(0.5f, 0.5f, 0.55f, 0.55f, WELLS, EXPERIMENT_NAME, "For automation needs");
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment(EXPERIMENT_NAME);
 		monitoringPage.tabs.select(MonitoringTabs.SUCCEEDED);
@@ -111,8 +115,7 @@ public class SmokeTest extends InitTest {
 	public void deleteExperiment() {
 		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
-		editEntityPage.openExperimentProperties().deleteExperiment();
-		editEntityPage.confirm();
+		experimentEditPage.deleteExperiment();
 		dashboardPage.checkOpened();
 	}
 	

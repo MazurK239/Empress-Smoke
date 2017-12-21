@@ -1,6 +1,8 @@
 package enums;
 
 public enum AnalysisViews {
+	T_VIEW,
+	T_GRAPH,
 	THUMBS,
 	DATA, 
 	HEATMAP, 

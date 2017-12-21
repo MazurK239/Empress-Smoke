@@ -29,7 +29,7 @@ public class LoginPage extends WebPage {
 	@FindBy(xpath="//div[contains(@class, 'error-popover')][text()='Please type password']")
 	private Text passwordError;
 
-	@FindBy(xpath="//span[contains(@class, 'error')][text()='Login or password is incorrect']")
+	@FindBy(xpath="//span[contains(@class, 'error')]")
 	private Text incorrectError;
 
 	@FindBy(xpath="//*[@type='checkbox']")

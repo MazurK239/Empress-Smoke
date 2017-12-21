@@ -22,14 +22,20 @@ public class NavPanel extends Section {
 		summarySection.expand();
 		cellSection.expand();
 		switch (view) {
-		case THUMBS:
+		case T_VIEW:
 			plateSection.menu.get(0).click();
 			break;
-		case DATA:
+		case T_GRAPH:
 			plateSection.menu.get(1).click();
+			break;			
+		case THUMBS:
+			plateSection.menu.get(2).click();
+			break;
+		case DATA:
+			plateSection.menu.get(3).click();
 			break;
 		case HEATMAP:
-			plateSection.menu.get(2).click();
+			plateSection.menu.get(4).click();
 			break;
 		case IMAGES:
 			plateSection.menu.get(plateSection.menu.size() - 1).click();

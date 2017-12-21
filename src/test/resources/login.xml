@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
   
-<suite name="LoginTests" verbose="1" >
+<suite name="LoginTests" verbose="0" >
   <test name="Credentials" >
     <classes>
        <class name="uitestsPO.LoginTestsCredentials" />

@@ -48,7 +48,7 @@ public class LoginTestsLogout extends InitTest {
 		Thread.sleep(360*1000);
 		loginPage.checkOpened();
 		loginPage.loginAs(USERNAME, PASSWORD);
-		editEntityPage.checkOpened();
+		experimentEditPage.checkOpened();
 	}
 
 	@Test

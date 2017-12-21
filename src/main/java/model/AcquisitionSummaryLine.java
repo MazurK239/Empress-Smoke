@@ -40,5 +40,6 @@ public class AcquisitionSummaryLine extends Section {
 	public void clickOnParameter() {
 		paramName.click();
 	}
+
 	
 }

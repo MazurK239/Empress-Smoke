@@ -6,7 +6,7 @@ import com.epam.jdi.uitests.web.selenium.elements.common.CheckBox;
 
 public class MldCheckbox extends CheckBox {
 
-	public boolean wetherChecked() {
+	public boolean whetherChecked() {
 		this.avatar.localElementSearchCriteria = el -> el != null;
 		return this.isChecked();
 	}

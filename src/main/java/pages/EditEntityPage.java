@@ -4,7 +4,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 
-import model.MldPopup;
 import sections.entity.EntityAcquisition;
 import sections.entity.EntityAnalyses;
 import sections.entity.EntityAnnotation;
@@ -23,10 +22,6 @@ public class EditEntityPage extends InternalPage {
 	
 	@FindBy(css="mld-entity-buttons-panel > button:last-of-type")
 	private Button experimentPropertiesIcon;	
-		
-	
-	@FindBy(css=".modal-dialog")
-	private MldPopup confirmation;
 	
 	@FindBy(css="mld-entity-analysis-panel")
 	public EntityAnalyses analyses;
@@ -53,13 +48,10 @@ public class EditEntityPage extends InternalPage {
 		annotationsIcon.click();
 		return annotations;
 	}
+	
 	public EntitySettings openExperimentProperties() {		
 		experimentPropertiesIcon.click();
 		return experimentProperties;
-	}
-
-	public void confirm() {
-		confirmation.ok();
 	}
 
 

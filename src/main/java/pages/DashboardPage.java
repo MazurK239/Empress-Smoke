@@ -5,13 +5,12 @@ import static com.epam.commons.LinqUtils.first;
 import org.openqa.selenium.support.FindBy;
 
 import com.epam.commons.Timer;
-import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 import com.epam.jdi.uitests.web.selenium.elements.complex.Elements;
 
 import model.ExperimentTile;
 import model.DashboardFilterSection;
 
-import static sites.EmpressSite.editEntityPage;
+import static sites.EmpressSite.experimentEditPage;
 
 public class DashboardPage extends InternalPage {
 
@@ -45,8 +44,7 @@ public class DashboardPage extends InternalPage {
 	public void deleteExperiment(String experimentName) {
 		try{
 			this.findExperiment(experimentName).open();
-			editEntityPage.openExperimentProperties().deleteExperiment();
-			editEntityPage.confirm();
+			experimentEditPage.deleteExperiment();
 		} catch (NullPointerException e) {
 			System.out.println("The experiment " + experimentName + " couldn't be deleted, because it doesn't exist");
 		}

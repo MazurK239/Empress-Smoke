@@ -19,7 +19,7 @@ public class LoginTestsCheckbox extends InitTest {
 	
 	@Test (priority=0)
 	public void initialState() {
-		Assert.isTrue(() -> !loginPage.checkbox.wetherChecked());
+		Assert.isTrue(() -> !loginPage.checkbox.whetherChecked());
 	}
 	
 	@Test (priority=1)

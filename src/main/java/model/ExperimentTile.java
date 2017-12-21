@@ -49,7 +49,7 @@ public class ExperimentTile extends Section {
 	}
 	
 	public boolean isSharedIconPresent() {
-		return icons.get(icons.size() - 1).getAttribute("class").contains("dashboard-item-vis-icon_private") ?  true : false;
+		return icons.get(2).getAttribute("class").contains("dashboard-item-vis-icon_private") ?  true : false;
 	}
 	
 }

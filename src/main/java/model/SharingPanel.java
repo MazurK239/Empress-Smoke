@@ -12,10 +12,10 @@ import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
 public class SharingPanel extends Section {
 
-	@FindBy(css="div > input.styled-checkbox")
+	@FindBy(css="div > label > input")
 	public MldCheckbox mainCheckbox;
 	
-	@FindBy(xpath=".//input")
+	@FindBy(css=".suggest-list-input")
 	private TextField input;
 	
 	@FindBy(xpath=".//ul[@class='suggest-list']/li/span[2]")

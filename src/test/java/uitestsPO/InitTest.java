@@ -6,7 +6,10 @@ import static sites.EmpressSite.*;
 
 import java.util.List;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import com.epam.jdi.uitests.web.selenium.elements.composite.WebSite;
@@ -27,6 +30,8 @@ public class InitTest extends TestNGBase {
 	protected static List<String> UNAVAILABLE_STAINS;
 	protected static List<String> TL_OPTIONS;
 	
+	protected static WebDriver driver;
+	
 	protected final static String TEMPLATE_NAME = "New Plate Acquisition";
 	
 	protected static Verify verify = new Verify();
@@ -35,6 +40,8 @@ public class InitTest extends TestNGBase {
 	public static void init() {
 		WebSite.init(EmpressSite.class);
 		Verify.getFails();
+		driver = loginPage.getDriver();
+		driver.manage().window().setSize(new Dimension(1700, 980));;
         logger.info("Run Tests");
         fillAction(p -> DEVICE_NAME = p, "device");
         fillAction(p -> USERNAME = p, "username");
@@ -50,10 +57,14 @@ public class InitTest extends TestNGBase {
 		experimentPage.goHome();
 	}
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
     public void tearDown() {
         Verify.getFails();
     }
 
+	@AfterSuite(alwaysRun = true)
+	public void finish() {		
+		driver.quit();
+	}
 	
 }

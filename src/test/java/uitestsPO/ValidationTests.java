@@ -76,8 +76,8 @@ public class ValidationTests extends InitTest {
 		assertTrue(() -> experimentPage.runTab.validationSummary.getRowByParam("Analysis services") != null);
 		experimentPage.openAcquisitionTab().setStains(Arrays.asList("Off", AVAILABLE_STAINS.get(0), "Off", "Off", "Off"));
 		experimentPage.openWellSelectionTab().selectWells(Arrays.asList("A1"));
-		experimentPage.openRunTab().setExperimentName("aaa").run();
-		assertTrue(() -> experimentPage.runTab.cannotRun());
+		experimentPage.openRunTab().setRunName("aaa").run();
+		assertTrue(() -> experimentPage.hasMessage());
 		experimentPage.openAnalysisSettingsTab().doAnalysis(false);
 		assertTrue(() -> experimentPage.openRunTab().validationSummary.getRowByParam("Analysis regions") == null);
 		assertTrue(() -> experimentPage.runTab.validationSummary.getRowByParam("Analysis services") == null);
@@ -90,7 +90,7 @@ public class ValidationTests extends InitTest {
 		experimentPage.openWellSelectionTab().clearAll();
 		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Selected Wells"));
 		experimentPage.runTab.run();
-		assertTrue(() -> experimentPage.runTab.cannotRun());
+		assertTrue(() -> experimentPage.hasMessage());
 		experimentPage.runTab.validationSummary.openMessage("Selected Wells");
 		assertTrue(experimentPage.getMessage().contains("No wells selected."));
 		experimentPage.openWellSelectionTab().selectWells(Arrays.asList("A1"));
@@ -103,7 +103,7 @@ public class ValidationTests extends InitTest {
 		experimentPage.openAnalysisSettingsTab().expandCellMeasurements().deselectAll();
 		assertTrue(() -> experimentPage.openRunTab().validationSummary.hasNotPassed("Selected measurements"));
 		experimentPage.runTab.run();
-		assertTrue(() -> experimentPage.runTab.cannotRun());
+		assertTrue(() -> experimentPage.hasMessage());
 		experimentPage.openRunTab().validationSummary.openMessage("Selected measurements");
 		assertTrue(experimentPage.getMessage().contains("At least one measurement needs to be selected."));
 		experimentPage.openAnalysisSettingsTab().expandCellMeasurements().selectSegmentation();

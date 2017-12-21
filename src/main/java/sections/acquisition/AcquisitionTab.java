@@ -16,7 +16,7 @@ import model.StainDropdownSection;
 
 public class AcquisitionTab extends Section {
 
-	@FindBy(css=".general-button-panel-right button:nth-child(2).panel-button-acq")
+	@FindBy(css=".general-button-panel_right button:nth-of-type(1)")
 	private MldToggler labwareToggler;
 
 	@FindBy(css=".labware-settings-list-item__value")
@@ -25,19 +25,19 @@ public class AcquisitionTab extends Section {
 	@FindBy(css=".labware-settings-list-item.selected .labware-settings-list-item__value")
 	private Clickable selectedLabware;
 	
-	@FindBy(css=".general-button-panel-right button:nth-child(4)")
+	@FindBy(css=".general-button-panel_right button:nth-of-type(3)")
 	private MldToggler objectiveToggler;
 
 	@FindBy(css=".objectives-settings-list-item__data > strong")
 	private Elements<Clickable> objectiveList;
 	
-	@FindBy(css=".general-button-panel-right button:nth-child(3)")
+	@FindBy(css=".general-button-panel_right button:nth-of-type(2)")
 	private MldToggler stainsToggler;
 
 	@FindBy(xpath="//mld-stains-panel//select/..")
 	private Elements<StainDropdownSection> dropdowns;
 	
-	@FindBy(css=".general-button-panel-right button:nth-of-type(4)")
+	@FindBy(css=".general-button-panel_right button:nth-of-type(4)")
 	private MldToggler compareToggler;
 
 	@FindBy(css=".general-panel-button-acq-capture")

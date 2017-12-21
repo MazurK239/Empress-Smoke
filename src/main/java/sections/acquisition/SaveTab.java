@@ -18,7 +18,7 @@ public class SaveTab extends Section {
 	@FindBy(xpath="//textarea[contains(@class,'description-input')]")
 	private TextField descriptionField;
 
-	@FindBy(css="mld-experiment-save-panel .general-panel-button:last-child")
+	@FindBy(css="button.save-protocol")
 	private Button saveButton;
 	
 	@FindBy(css="mld-experiment-save-panel .general-panel-button:first-child")

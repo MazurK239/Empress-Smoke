@@ -7,7 +7,7 @@ import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
 public class AcquisitionSummary extends Section {
 	
-	@FindBy(css=".mld-experiment-validation>.row")
+	@FindBy(css=".mld-experiment-validation>.row.ng-scope")
 	private Elements<AcquisitionSummaryLine> rows;
 	
 	public boolean hasPassed(String paramName) {
@@ -20,7 +20,7 @@ public class AcquisitionSummary extends Section {
 
 	public AcquisitionSummaryLine getRowByParam(String paramName) {
 		for (AcquisitionSummaryLine row : rows) {
-			if (row.getParamName().equals(paramName)) {return row;}
+			if (row.getParamName().equalsIgnoreCase(paramName)) {return row;}
 		}
 		return null;
 	}
@@ -31,6 +31,13 @@ public class AcquisitionSummary extends Section {
 
 	public void openParameter(String paramName) {
 		getRowByParam(paramName).clickOnParameter();
+	}
+	
+	public boolean allPassed() {
+		for (AcquisitionSummaryLine acquisitionSummaryLine : rows) {
+			if (acquisitionSummaryLine.hasNotPassed()) {return false;}
+		}
+		return true;
 	}
 
 }

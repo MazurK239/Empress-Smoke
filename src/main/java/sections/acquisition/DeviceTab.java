@@ -10,10 +10,10 @@ import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
 
 public class DeviceTab extends Section {
 
-	@FindBy(xpath="//ul/li/span[contains(@class, 'item-name')]")
+	@FindBy(css="li.list-item .device-header-title")
 	private Elements<Clickable> devices;
 
-	@FindBy(css="li.selected-item > .item-name")
+	@FindBy(css="li.selected-item .device-header-title")
 	public Element selectedDevice;
 	
 	public String getSelectedDeviceName() {
@@ -30,11 +30,11 @@ public class DeviceTab extends Section {
 	}
 
 	public Boolean isDeviceOnline(String deviceName) {
-		return devices.get(deviceName).get(By.xpath("./../span[2]/*[contains(@class, 'fill-sucess')]")).isDisplayed();
+		return devices.get(deviceName).get(By.xpath("./../div//*[text()='Online']")).isDisplayed();
 	}
 
 	public Boolean isDeviceOffline(String deviceName) {
-		return devices.get(deviceName).get(By.xpath("./../span[2]/*[contains(@class, 'fill-error')]")).isDisplayed();
+		return devices.get(deviceName).get(By.xpath("./../div//*[text()='Offline']")).isDisplayed();
 	}
 	
 }

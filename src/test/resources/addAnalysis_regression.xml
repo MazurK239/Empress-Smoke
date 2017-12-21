@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name=" Add Analysis Regression">
+	<!-- <test name="Basic Functionality">
+		<groups>
+			<run>
+				<include name="basic"></include>
+			</run>
+		</groups>
+		<classes>
+		    <class name="uitestsPO.AddAnalysisRegression"/>		    
+		</classes>
+	</test> 
+	<test name="Validation Tests">
+		<groups>
+			<run>
+				<include name="validation"></include>
+			</run>
+		</groups>
+		<classes>
+		    <class name="uitestsPO.AddAnalysisRegression"/>		    
+		</classes>
+	</test> 
+	<test name="Toggler Tests">
+		<groups>
+			<run>
+				<include name="toggler"></include>
+			</run>
+		</groups>
+		<classes>
+		    <class name="uitestsPO.AddAnalysisRegression"/>		    
+		</classes>
+	</test> -->
+	<test name="Time Point changing Tests">
+		<groups>
+			<run>
+				<include name="change_timepoints"></include>
+			</run>
+		</groups>
+		<classes>
+		    <class name="uitestsPO.AddAnalysisRegression"/>		    
+		</classes>
+	</test>
+</suite> 

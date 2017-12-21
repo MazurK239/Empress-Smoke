@@ -34,7 +34,7 @@ public class PermissionsTests extends InitTest {
 			dashboardPage.goHome().openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL).findTemplate("New Plate Acquisition").open();
 			AVAILABLE_STAINS = experimentPage.openAcquisitionTab().getAvailableStains();
 			experimentPage.runFromScratch(DEVICE_NAME, "96 Well Plate", Arrays.asList("Off", "Off", AVAILABLE_STAINS.get(0), AVAILABLE_STAINS.get(1), "Off"),
-					                      "4x", 0.4f, 0.4f, false, ANALYSIS_NAME, 0.5f, 0.5f, Arrays.asList("E7", "E8"), EXPERIMENT_NAME, "");
+					                      "4x", 0.4f, 0.4f, false, ANALYSIS_NAME, 0.5f, 0.5f, Arrays.asList("E7", "E8"), false, new int[] {}, EXPERIMENT_NAME, "");
 			monitoringPage.checkOpened();
 			monitoringPage.waitForExperiment(EXPERIMENT_NAME);
 		}
@@ -43,6 +43,10 @@ public class PermissionsTests extends InitTest {
 	@BeforeMethod
 	public void startTest() {
 		landingPage.open();
+		if (!experimentPage.confirmation.isDisplayed()) {
+			return;
+		}
+		experimentPage.confirmation.ok();
 		landingPage.checkOpened();
 	}
 	
@@ -54,9 +58,9 @@ public class PermissionsTests extends InitTest {
 		userSettingsPage.goHome().openDataAcquisitionPage();
 		experimentTemplatesPage.selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
-		verify.isTrue(() -> experimentPage.openSaveTab().expandSharingPanel().mainCheckbox.wetherChecked());
+		verify.isTrue(() -> experimentPage.openSaveTab().expandSharingPanel().mainCheckbox.whetherChecked());
 		verify.isTrue(() -> experimentPage.saveTab.expandSharingPanel().isUserInList("aaa"));
-		verify.isTrue(() -> experimentPage.openRunTab().expandSharingPanel().mainCheckbox.wetherChecked());
+		verify.isTrue(() -> experimentPage.openRunTab().expandSharingPanel().mainCheckbox.whetherChecked());
 		verify.isTrue(() -> experimentPage.runTab.expandSharingPanel().isUserInList("bbb"));
 		experimentPage.openUserPrefs();
 		userSettingsPage.openPermissionsTab().protocolSharingPanel.removeAllUsers().unlockLock();
@@ -71,9 +75,9 @@ public class PermissionsTests extends InitTest {
 		userSettingsPage.openPermissionsTab().experimentSharingPanel.lockLock().addUsers(Arrays.asList(""));
 		userSettingsPage.goHome().openDataAcquisitionPage().selectTab(ExpDashboardTabs.ADD_PROTOCOL);
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
-		verify.isTrue(() -> experimentPage.openSaveTab().expandSharingPanel().mainCheckbox.wetherChecked());
+		verify.isTrue(() -> experimentPage.openSaveTab().expandSharingPanel().mainCheckbox.whetherChecked());
 		verify.isTrue(() -> experimentPage.saveTab.expandSharingPanel().isUserInList(USERNAME));
-		verify.isTrue(() -> experimentPage.openRunTab().expandSharingPanel().mainCheckbox.wetherChecked());
+		verify.isTrue(() -> experimentPage.openRunTab().expandSharingPanel().mainCheckbox.whetherChecked());
 		verify.isTrue(() -> experimentPage.runTab.expandSharingPanel().isUserInList(USERNAME));
 		experimentPage.openUserPrefs();
 		userSettingsPage.openPermissionsTab().protocolSharingPanel.unlockLock();
@@ -81,17 +85,17 @@ public class PermissionsTests extends InitTest {
 		Assert.isEmpty(Verify.getFails());
 	}
 	
-	@Test(groups={"entity"})
+//	@Test(groups={"entity"})
 	public void shareExistingHide() {
 		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.checkOpened();
-		verify.isTrue(() -> !editEntityPage.openExperimentProperties().expandSharingPanel().mainCheckbox.wetherChecked());
+		verify.isTrue(() -> !editEntityPage.openExperimentProperties().expandSharingPanel().mainCheckbox.whetherChecked());
 		editEntityPage.experimentProperties.sharingPanel.mainCheckbox.checkIt();
 		if (editEntityPage.experimentProperties.sharingPanel.isUserInList("mld")) {
 			editEntityPage.experimentProperties.sharingPanel.removeUser("mld");
 		}
-		verify.isTrue(() -> editEntityPage.experimentProperties.sharingPanel.mainCheckbox.wetherChecked());
+		verify.isTrue(() -> editEntityPage.experimentProperties.sharingPanel.mainCheckbox.whetherChecked());
 		verify.isTrue(() -> editEntityPage.experimentProperties.sharingPanel.isInputAvailable());
 		editEntityPage.logout();
 		loginPage.checkOpened();
@@ -106,14 +110,14 @@ public class PermissionsTests extends InitTest {
 		Assert.isEmpty(Verify.getFails());
 	}
 
-	@Test(groups={"entity"})
+//	@Test(groups={"entity"})
 	public void shareExistingAllow() {
 		landingPage.openDataVisualizationPage();
 		dashboardPage.findExperiment(EXPERIMENT_NAME).open();
 		editEntityPage.checkOpened();
-		verify.isTrue(() -> !editEntityPage.openExperimentProperties().expandSharingPanel().mainCheckbox.wetherChecked());
+		verify.isTrue(() -> !editEntityPage.openExperimentProperties().expandSharingPanel().mainCheckbox.whetherChecked());
 		editEntityPage.experimentProperties.sharingPanel.mainCheckbox.checkIt();
-		verify.isTrue(() -> editEntityPage.experimentProperties.sharingPanel.mainCheckbox.wetherChecked());
+		verify.isTrue(() -> editEntityPage.experimentProperties.sharingPanel.mainCheckbox.whetherChecked());
 		verify.isTrue(() -> editEntityPage.experimentProperties.sharingPanel.isInputAvailable());
 		editEntityPage.experimentProperties.sharingPanel.addUser("mld");
 		editEntityPage.logout();
@@ -129,7 +133,7 @@ public class PermissionsTests extends InitTest {
 		Assert.isEmpty(Verify.getFails());
 	}
 	
-	@Test(groups={"dashboard"})
+//	@Test(groups={"dashboard"})
 	public void sharedIconTest() {
 		landingPage.openDataVisualizationPage();
 		assertTrue(() -> dashboardPage.findExperiment(EXPERIMENT_NAME).isSharedIconPresent());
@@ -156,7 +160,7 @@ public class PermissionsTests extends InitTest {
 		experimentPage.openAnZonesTab().addMinZone(0.5f, 0.5f);
 		experimentPage.openWellSelectionTab().selectWells(Arrays.asList("E7"));
 		experimentPage.openRunTab().expandSharingPanel().mainCheckbox.checkIt();
-		experimentPage.runTab.setExperimentName("Permissions Icon Test Private").run();
+		experimentPage.runTab.setRunName("Permissions Icon Test Private").run();
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment("Permissions Icon Test Private");
 		monitoringPage.goHome().openDataVisualizationPage();
@@ -169,7 +173,7 @@ public class PermissionsTests extends InitTest {
 		experimentTemplatesPage.findTemplate("New Plate Acquisition").open();
 		String stain = experimentPage.openAcquisitionTab().getAvailableStains().get(0);
 		experimentPage.runFromScratch(DEVICE_NAME, "96 Well Plate", Arrays.asList("Off", "Off", "Off", stain, "Off"),
-				                      "4x", 0.5f, 0.5f, false, ANALYSIS_NAME,  0.5f, 0.5f, Arrays.asList("E7"), "Permissions Icon Test Shared", "");
+				                      "4x", 0.5f, 0.5f, false, ANALYSIS_NAME,  0.5f, 0.5f, Arrays.asList("E7"), false, new int[] {}, "Permissions Icon Test Shared", "");
 		monitoringPage.checkOpened();
 		monitoringPage.waitForExperiment("Permissions Icon Test Shared");
 		monitoringPage.goHome().openDataVisualizationPage();

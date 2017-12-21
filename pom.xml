@@ -76,47 +76,5 @@
         </plugins>
     </reporting>
   	
-  	<!-- profiles -->
-    <profiles>
-    	<profile>
-      		<id>dev</id>
-      		<properties>
-        		<env>dev</env>
-        		<domain>https://empress1.mld-idv.projects.epam.com/1.0/index.html#</domain>
-        		<browser.name>chrome</browser.name>
-        		<sila.name>EMPRESS</sila.name>
-        		<username>mld</username>
-        		<password>9x783x8vwr6Z</password>
-        		<mld.password>9x783x8vwr6Z</mld.password>
-      		</properties>
-    	</profile>
-    	<profile>
-      		<id>azure</id>
-      		<properties>
-        		<env>azure</env>
-        		<domain>http://mld-idv-dev1.cloudapp.net/index.html#</domain>
-        		<browser.name>chrome</browser.name>
-        		<sila.name>mld-idv-dev1</sila.name>
-        		<username>user1</username>
-        		<password>p@ssw0rd</password>
-        		<mld.password>mldp@ssw0rd</mld.password>
-      		</properties>
-    	</profile>
-    	<profile>
-      		<id>local</id>
-      		<properties>
-        		<env>local</env>
-        		<domain>localhost:8080/index.html#</domain>
-        		<browser.name>chrome</browser.name>
-        		<sila.name>EPRUPETW6500</sila.name>
-        		<username>user1</username>
-        		<password>For$tarters-239</password>
-        		<mld.password>For$tarters-239</mld.password>
-      		</properties>
-      		<activation>
-      			<activeByDefault>true</activeByDefault>
-      		</activation>
-    	</profile>
-    </profiles>
   
 </project>
